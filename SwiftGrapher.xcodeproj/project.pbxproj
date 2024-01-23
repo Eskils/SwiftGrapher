@@ -11,6 +11,10 @@
 		7BA788922B51472700C52003 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA788912B51472700C52003 /* ViewController.swift */; };
 		7BA788942B51472A00C52003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BA788932B51472A00C52003 /* Assets.xcassets */; };
 		7BA788972B51472A00C52003 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BA788952B51472A00C52003 /* Main.storyboard */; };
+		7BA788A02B51496800C52003 /* SwiftCompilerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA7889F2B51496800C52003 /* SwiftCompilerService.swift */; };
+		7BA788A22B5152EF00C52003 /* DynamicLibraryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA788A12B5152EF00C52003 /* DynamicLibraryHandler.swift */; };
+		7BA788A42B5158A600C52003 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA788A32B5158A600C52003 /* Logger.swift */; };
+		7BA788A62B516BB700C52003 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA788A52B516BB700C52003 /* GraphView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +24,10 @@
 		7BA788932B51472A00C52003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7BA788962B51472A00C52003 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7BA788982B51472A00C52003 /* SwiftGrapher.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftGrapher.entitlements; sourceTree = "<group>"; };
+		7BA7889F2B51496800C52003 /* SwiftCompilerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftCompilerService.swift; sourceTree = "<group>"; };
+		7BA788A12B5152EF00C52003 /* DynamicLibraryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicLibraryHandler.swift; sourceTree = "<group>"; };
+		7BA788A32B5158A600C52003 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		7BA788A52B516BB700C52003 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,11 +62,23 @@
 			children = (
 				7BA7888F2B51472700C52003 /* AppDelegate.swift */,
 				7BA788912B51472700C52003 /* ViewController.swift */,
+				7BA788A32B5158A600C52003 /* Logger.swift */,
+				7BA788A12B5152EF00C52003 /* DynamicLibraryHandler.swift */,
+				7BA788A52B516BB700C52003 /* GraphView.swift */,
+				7BA7889E2B51495600C52003 /* Services */,
 				7BA788932B51472A00C52003 /* Assets.xcassets */,
 				7BA788952B51472A00C52003 /* Main.storyboard */,
 				7BA788982B51472A00C52003 /* SwiftGrapher.entitlements */,
 			);
 			path = SwiftGrapher;
+			sourceTree = "<group>";
+		};
+		7BA7889E2B51495600C52003 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				7BA7889F2B51496800C52003 /* SwiftCompilerService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,8 +151,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BA788A42B5158A600C52003 /* Logger.swift in Sources */,
+				7BA788A02B51496800C52003 /* SwiftCompilerService.swift in Sources */,
 				7BA788922B51472700C52003 /* ViewController.swift in Sources */,
+				7BA788A22B5152EF00C52003 /* DynamicLibraryHandler.swift in Sources */,
 				7BA788902B51472700C52003 /* AppDelegate.swift in Sources */,
+				7BA788A62B516BB700C52003 /* GraphView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,7 +302,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = EUKTZ7725R;
-				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
@@ -305,7 +329,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = EUKTZ7725R;
-				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
