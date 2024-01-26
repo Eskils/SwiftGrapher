@@ -18,12 +18,14 @@ class GraphView: TransformManager {
         let height = self.frame.height
         
         let verticalBarPath = CGMutablePath()
-        verticalBarPath.move(to: CGPoint(x: width * transformAnchorPoint.x + translation.x, y: 0))
-        verticalBarPath.addLine(to: CGPoint(x: width * transformAnchorPoint.x + translation.x, y: height))
+        let verticalBaseX = (width * transformAnchorPoint.x + translation.x)
+        verticalBarPath.move(to: CGPoint(x: verticalBaseX, y: 0))
+        verticalBarPath.addLine(to: CGPoint(x: verticalBaseX, y: height))
         
         let horizontalBarPath = CGMutablePath()
-        horizontalBarPath.move(to: CGPoint(x: 0, y: height * transformAnchorPoint.y + translation.y))
-        horizontalBarPath.addLine(to: CGPoint(x: width, y: height * transformAnchorPoint.y + translation.y))
+        let horizontalBaseY = (height * transformAnchorPoint.y + translation.y)
+        horizontalBarPath.move(to: CGPoint(x: 0, y: horizontalBaseY))
+        horizontalBarPath.addLine(to: CGPoint(x: width, y: horizontalBaseY))
         
         NSColor.lightGray.setStroke()
         NSBezierPath(cgPath: verticalBarPath).stroke()
@@ -39,7 +41,7 @@ class GraphView: TransformManager {
         let height = self.frame.height
         
         let midWidth = width / 2
-        let horizontalScale = 10.0
+        let horizontalScale = 10.0 * scale
         let horizontalScaleFactor = 1 / horizontalScale
         
         let functionPath = CGMutablePath()
@@ -56,7 +58,7 @@ class GraphView: TransformManager {
         var drawX = 0.0
         
         for _ in 0..<Int(ceil(iterations)) {
-            let y = dataSource.graph(self, valueForX: x) + transformAnchorPoint.y * height + translation.y
+            let y = scale * dataSource.graph(self, valueForX: x) + transformAnchorPoint.y * height + translation.y
             let point = CGPoint(x: drawX, y: y)
             
             if functionPath.isEmpty {
@@ -94,8 +96,8 @@ class GraphView: TransformManager {
         )
     }
     
-    override func scrollViewDidScroll(_ scrollView: NSScrollView) {
-        super.scrollViewDidScroll(scrollView)
+    override func didUpdateTranslationOrScale() {
+        super.didUpdateTranslationOrScale()
         
         self.display()
     }
@@ -125,7 +127,8 @@ class TransformManager: NSView {
     
     private var translationAccumulated: CGPoint = .zero
     var translation: CGPoint = .zero
-    
+    var scale: CGFloat = 1
+    private var isInScaleMode: Bool = false
     
     lazy var startpnt = CGPoint(x: magnitude() * transformAnchorPoint.x, y: magnitude() * transformAnchorPoint.y)
     
@@ -152,6 +155,9 @@ class TransformManager: NSView {
         scrollView.verticalScrollElasticity = .none
         scrollView.horizontalScrollElasticity = .none
         scrollView.usesPredominantAxisScrolling = false
+        scrollView.allowsMagnification = true
+        scrollView.minMagnification = 0.1
+        scrollView.maxMagnification = 100
         
         didResetTransform = true
         
@@ -163,6 +169,13 @@ class TransformManager: NSView {
             self,
             selector: #selector(scrollViewDidStartScrolling(notification:)),
             name: NSScrollView.willStartLiveScrollNotification,
+            object: scrollView
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(scrollViewDidStartMagnification(notification:)),
+            name: NSScrollView.willStartLiveMagnifyNotification,
             object: scrollView
         )
 
@@ -200,11 +213,21 @@ class TransformManager: NSView {
             return
         }
         
-        scrollViewDidScroll(scrollView)
+        print("magnification: \(scrollView.magnification)")
+        
+        if isInScaleMode {
+            scale = scrollView.magnification
+            let location = NSEvent.mouseLocation
+            let locationInView = self.convert(location, to: self)
+            
+            didUpdateTranslationOrScale()
+        } else {
+            scrollViewDidScroll(scrollView)
+        }
     }
     
     @objc
-    func scrollViewDidStartScrolling(notification: NSNotification) {
+    private func scrollViewDidStartScrolling(notification: NSNotification) {
         if notification.object as? NSObject != scrollView {
             return
         }
@@ -214,9 +237,27 @@ class TransformManager: NSView {
         let off = scrollView.contentView.bounds.origin
         startpnt = off
         translationAccumulated = translation
+        
+        print("Did start scroll")
+        isInScaleMode = false
     }
     
-    func scrollViewDidScroll(_ scrollView: NSScrollView) {
+    @objc
+    private func scrollViewDidStartMagnification(notification: NSNotification) {
+        if notification.object as? NSObject != scrollView {
+            return
+        }
+        
+        print("Did start magnification")
+        translationAccumulated = translation
+        isInScaleMode = true
+        
+        let location = NSEvent.mouseLocation
+        let locationInView = self.convert(location, to: self)
+        startpnt = convertViewPointToTransformPoint(locationInView)
+    }
+    
+    private func scrollViewDidScroll(_ scrollView: NSScrollView) {
         
         if didResetTransform {
             didResetTransform = false
@@ -230,6 +271,15 @@ class TransformManager: NSView {
         let deltaOffset = CGPoint(x: off.x - startpnt.x, y: off.y - startpnt.y)
         
         translation = CGPoint(x: translationAccumulated.x + deltaOffset.x, y: translationAccumulated.y + deltaOffset.y)
+        
+        didUpdateTranslationOrScale()
+    }
+    
+    open func didUpdateTranslationOrScale() {}
+    
+    private func convertViewPointToTransformPoint(_ viewPoint: CGPoint) -> CGPoint {
+        let transform = CGAffineTransform(scaleX: 1 / scale, y: 1 / scale)
+        return viewPoint.applying(transform)
     }
     
 }
