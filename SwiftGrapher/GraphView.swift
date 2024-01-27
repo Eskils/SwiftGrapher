@@ -11,8 +11,6 @@ class GraphView: TransformManager {
     
     weak var dataSource: GraphViewDataSource?
     
-    private var imageToDraw: CGImage?
-    
     private func drawAxes() {
         let width = self.frame.width
         let height = self.frame.height
@@ -49,51 +47,61 @@ class GraphView: TransformManager {
         let end = (midWidth - translation.x) * horizontalScaleFactor
         let range = start..<end
         
-        let deltaSteps = 10.0
+        let deltaSteps = 6.0 * scale
         let delta = 1 / Double(deltaSteps)
         let iterations = deltaSteps * (range.upperBound - range.lowerBound)
         let drawDelta = self.frame.width / iterations
         
         var x = Double(range.lowerBound)
         var drawX = 0.0
+        var didSkipPoint = false
+        var skipPointCap = 0.0
         
-        for _ in 0..<Int(ceil(iterations)) {
+        for _ in 0...Int(ceil(iterations)) {
+            
+            defer {
+                x += delta
+                drawX += drawDelta
+            }
+            
             let y = scale * dataSource.graph(self, valueForX: x) + transformAnchorPoint.y * height + translation.y
             let point = CGPoint(x: drawX, y: y)
+            print(x, y)
+            
+            // FIXME: Use vertical asymptotic analysis to determine
+            if y.isInfinite || y.isNaN || y > height || y < -height {
+                if y > height {
+                    skipPointCap = height
+                } else {
+                    skipPointCap = -height
+                }
+                
+                if !didSkipPoint {
+                    functionPath.addLine(to: CGPoint(x: drawX, y: skipPointCap))
+                }
+                
+                didSkipPoint = true
+                
+                continue
+            }
+            
+            if didSkipPoint {
+                functionPath.move(to: CGPoint(x: drawX - drawDelta, y: skipPointCap))
+                functionPath.addLine(to: CGPoint(x: drawX, y: skipPointCap))
+                didSkipPoint = false
+            }
             
             if functionPath.isEmpty {
                 functionPath.move(to: point)
             } else {
                 functionPath.addLine(to: point)
             }
-            
-            x += delta
-            drawX += drawDelta
         }
         
         NSColor.systemBlue.setStroke()
         let functionNS = NSBezierPath(cgPath: functionPath)
         functionNS.lineWidth = 2
         functionNS.stroke()
-    }
-    
-    private func makeGraphicsContext() -> CGContext? {
-        let width = Int(self.frame.width)
-        let height = Int(self.frame.height)
-        let bitmapBytesPerRow = width * 4
-
-        let colorSpace:CGColorSpace = CGColorSpaceCreateDeviceRGB()
-        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
-        
-        return CGContext(
-            data: nil,
-            width: width,
-            height: height,
-            bitsPerComponent: 8,
-            bytesPerRow: bitmapBytesPerRow,
-            space: colorSpace,
-              bitmapInfo: bitmapInfo.rawValue
-        )
     }
     
     override func didUpdateTranslationOrScale() {
@@ -119,6 +127,12 @@ protocol GraphViewDataSource: AnyObject {
 
 class TransformManager: NSView {
     
+    private enum TransformMode {
+        case translation
+        case scale
+        case idle
+    }
+    
     let scrollView = NSScrollView()
     let contentView = NSView()
     var translationMagnitude: Int = 1000
@@ -128,9 +142,10 @@ class TransformManager: NSView {
     private var translationAccumulated: CGPoint = .zero
     var translation: CGPoint = .zero
     var scale: CGFloat = 1
-    private var isInScaleMode: Bool = false
+    private var transformMode: TransformMode = .idle
     
     lazy var startpnt = CGPoint(x: magnitude() * transformAnchorPoint.x, y: magnitude() * transformAnchorPoint.y)
+    private var startScale = 1.0
     
     override func viewDidMoveToWindow() {
         super.viewDidMoveToWindow()
@@ -178,6 +193,13 @@ class TransformManager: NSView {
             name: NSScrollView.willStartLiveMagnifyNotification,
             object: scrollView
         )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(scrollViewDidEndMagnification(notification:)),
+            name: NSScrollView.didEndLiveMagnifyNotification,
+            object: scrollView
+        )
 
         NotificationCenter.default.addObserver(
             self,
@@ -214,15 +236,23 @@ class TransformManager: NSView {
         }
         
         print("magnification: \(scrollView.magnification)")
+        print("translation: \(translation)")
         
-        if isInScaleMode {
+        switch transformMode {
+        case .translation:
+            scrollViewDidScroll(scrollView)
+        case .scale:
             scale = scrollView.magnification
-            let location = NSEvent.mouseLocation
-            let locationInView = self.convert(location, to: self)
+            let locationInWindow = NSEvent.mouseLocation
+            let translation = convertWindowLocationToTransformPoint(locationInWindow)
+            let deltaScale = scrollView.magnification - startScale
+            let t = deltaScale
+            print(t)
+            self.translation = CGPoint(x: translationAccumulated.x - t * translation.x, y: translationAccumulated.y - t * translation.y)
             
             didUpdateTranslationOrScale()
-        } else {
-            scrollViewDidScroll(scrollView)
+        case .idle:
+            break
         }
     }
     
@@ -232,6 +262,7 @@ class TransformManager: NSView {
             return
         }
         
+        transformMode = .idle
         scrollView.contentView.bounds.origin = .zero
         
         let off = scrollView.contentView.bounds.origin
@@ -239,7 +270,7 @@ class TransformManager: NSView {
         translationAccumulated = translation
         
         print("Did start scroll")
-        isInScaleMode = false
+        transformMode = .translation
     }
     
     @objc
@@ -248,13 +279,23 @@ class TransformManager: NSView {
             return
         }
         
+        transformMode = .idle
         print("Did start magnification")
         translationAccumulated = translation
-        isInScaleMode = true
+        startScale = scrollView.magnification
+        transformMode = .scale
+    }
+    
+    @objc
+    private func scrollViewDidEndMagnification(notification: NSNotification) {
+        if notification.object as? NSObject != scrollView {
+            return
+        }
         
-        let location = NSEvent.mouseLocation
-        let locationInView = self.convert(location, to: self)
-        startpnt = convertViewPointToTransformPoint(locationInView)
+        print("Did finish magnification")
+        transformMode = .idle
+        translationAccumulated = translation
+        startScale = scrollView.magnification
     }
     
     private func scrollViewDidScroll(_ scrollView: NSScrollView) {
@@ -268,7 +309,7 @@ class TransformManager: NSView {
         
         if off == startpnt { translationAccumulated = .zero; return }
         
-        let deltaOffset = CGPoint(x: off.x - startpnt.x, y: off.y - startpnt.y)
+        let deltaOffset = SIMD2(x: off.x - startpnt.x, y: off.y - startpnt.y) * startScale
         
         translation = CGPoint(x: translationAccumulated.x + deltaOffset.x, y: translationAccumulated.y + deltaOffset.y)
         
@@ -277,9 +318,20 @@ class TransformManager: NSView {
     
     open func didUpdateTranslationOrScale() {}
     
-    private func convertViewPointToTransformPoint(_ viewPoint: CGPoint) -> CGPoint {
-        let transform = CGAffineTransform(scaleX: 1 / scale, y: 1 / scale)
-        return viewPoint.applying(transform)
+    override func mouseDown(with event: NSEvent) {
+        let locationInWindow = NSEvent.mouseLocation
+        let translation = convertWindowLocationToTransformPoint(locationInWindow)
+        print(translation)
+    }
+    
+    private func convertWindowLocationToTransformPoint(_ locationInWindow: CGPoint) -> CGPoint {
+        let originX = (self.frame.width * transformAnchorPoint.x + translationAccumulated.x)
+        let originY = (self.frame.height * transformAnchorPoint.y + translationAccumulated.y)
+        let screenRect = CGRect(origin: locationInWindow, size: CGSize(width: 1, height: 1));
+        let baseRect = self.window?.convertFromScreen(screenRect) ?? screenRect
+        let locationInView = self.convert(baseRect.origin, from: nil)
+        let location = SIMD2(x: locationInView.x - originX, y: locationInView.y - originY) / startScale
+        return CGPoint(x: location.x, y: location.y)
     }
     
 }

@@ -14,8 +14,8 @@
             filePath = "SwiftGrapher/GraphView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
+            startingLineNumber = "229"
+            endingLineNumber = "229"
             landmarkName = "configureScrollView(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,24 +30,8 @@
             filePath = "SwiftGrapher/GraphView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
-            landmarkName = "scrollViewDidScroll(notification:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "6223AF88-081C-4F68-8BFC-2FA9A8D05F36"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SwiftGrapher/GraphView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "225"
-            endingLineNumber = "225"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
             landmarkName = "scrollViewDidScroll(notification:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,8 +46,8 @@
             filePath = "SwiftGrapher/GraphView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
             landmarkName = "draw(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -78,8 +62,8 @@
             filePath = "SwiftGrapher/GraphView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "draw(_:)"
             landmarkType = "7">
             <Locations>
@@ -126,8 +110,8 @@
             filePath = "SwiftGrapher/GraphView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
             landmarkName = "drawFunction()"
             landmarkType = "7">
             <Locations>
