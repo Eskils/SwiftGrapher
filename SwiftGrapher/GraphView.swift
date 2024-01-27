@@ -66,7 +66,6 @@ class GraphView: TransformManager {
             
             let y = scale * dataSource.graph(self, valueForX: x) + transformAnchorPoint.y * height + translation.y
             let point = CGPoint(x: drawX, y: y)
-            print(x, y)
             
             // FIXME: Use vertical asymptotic analysis to determine
             if y.isInfinite || y.isNaN || y > height || y < -height {
@@ -76,7 +75,7 @@ class GraphView: TransformManager {
                     skipPointCap = -height
                 }
                 
-                if !didSkipPoint {
+                if !didSkipPoint && !functionPath.isEmpty {
                     functionPath.addLine(to: CGPoint(x: drawX, y: skipPointCap))
                 }
                 
@@ -235,9 +234,6 @@ class TransformManager: NSView {
             return
         }
         
-        print("magnification: \(scrollView.magnification)")
-        print("translation: \(translation)")
-        
         switch transformMode {
         case .translation:
             scrollViewDidScroll(scrollView)
@@ -247,7 +243,6 @@ class TransformManager: NSView {
             let translation = convertWindowLocationToTransformPoint(locationInWindow)
             let deltaScale = scrollView.magnification - startScale
             let t = deltaScale
-            print(t)
             self.translation = CGPoint(x: translationAccumulated.x - t * translation.x, y: translationAccumulated.y - t * translation.y)
             
             didUpdateTranslationOrScale()
@@ -269,7 +264,6 @@ class TransformManager: NSView {
         startpnt = off
         translationAccumulated = translation
         
-        print("Did start scroll")
         transformMode = .translation
     }
     
@@ -280,7 +274,6 @@ class TransformManager: NSView {
         }
         
         transformMode = .idle
-        print("Did start magnification")
         translationAccumulated = translation
         startScale = scrollView.magnification
         transformMode = .scale
@@ -292,7 +285,6 @@ class TransformManager: NSView {
             return
         }
         
-        print("Did finish magnification")
         transformMode = .idle
         translationAccumulated = translation
         startScale = scrollView.magnification
@@ -317,12 +309,6 @@ class TransformManager: NSView {
     }
     
     open func didUpdateTranslationOrScale() {}
-    
-    override func mouseDown(with event: NSEvent) {
-        let locationInWindow = NSEvent.mouseLocation
-        let translation = convertWindowLocationToTransformPoint(locationInWindow)
-        print(translation)
-    }
     
     private func convertWindowLocationToTransformPoint(_ locationInWindow: CGPoint) -> CGPoint {
         let originX = (self.frame.width * transformAnchorPoint.x + translationAccumulated.x)
