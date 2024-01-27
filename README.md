@@ -9,7 +9,7 @@ A graphing tool for macOS allowing you to write equations as Swift code. This is
 Works by compiling your code with `swiftc` to a dylib, and then linking at runtime.
 
 ## Roadmap
-- [ ] Zooming in the graph view
+- [x] Zooming in the graph view
 - [ ] Syntax highlighting
 - [ ] Support multiple equations
 - [ ] Display compiler errors
