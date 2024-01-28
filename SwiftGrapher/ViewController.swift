@@ -6,10 +6,14 @@
 //
 
 import Cocoa
+import Combine
 
 class ViewController: NSViewController {
     
-    let compilerService = SwiftCompilerServiceImpl()
+    let compilerService: SwiftCompilerService
+    let equationManagementService: EquationManagementService
+    
+    var cancellables = Set<AnyCancellable>()
 
     @IBOutlet var textView: NSTextView!
     
@@ -17,77 +21,140 @@ class ViewController: NSViewController {
     
     @IBOutlet var graphViewContainer: GraphView!
     
-    var dylibHandler: DynamicLibraryHandler?
+    var equationCalculationModels = [EquationCalculationModel]()
     
-    var calculationHandler: (@convention(c)(Double) -> Double)?
+    required init?(coder: NSCoder) {
+        guard let delegate = NSApp.delegate as? AppDelegate else {
+            assertionFailure()
+            return nil
+        }
+        
+        self.compilerService = delegate.compilerService
+        self.equationManagementService = delegate.equationManagementService
+        super.init(coder: coder)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        textView.string = """
-        import Foundation
+        textView.string = ""
+        textView.font = .monospacedSystemFont(ofSize: 14, weight: .regular)
         
-        @_cdecl("calculation")
-        public func calculation(x: Double) -> Double {
-            return 100 * sin(x)
-        }
-        """
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didChangeText),
+            name: NSTextView.didChangeNotification,
+            object: textView
+        )
 
         compileButton.target = self
         compileButton.action = #selector(compile)
         
         graphViewContainer.dataSource = self
         graphViewContainer.clipsToBounds = true
+        
+        equationManagementService.equationsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: didUpdate(equations:))
+            .store(in: &cancellables)
+        
+        equationManagementService.selectedEquationPublisher
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: didUpdate(selectedEquation:))
+            .store(in: &cancellables)
     }
-
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
+    
+    private func didUpdate(equations: [Equation]) {
+        let addedEquations = equations
+            .filter { equation in
+                !equationCalculationModels.contains(where: { model in model.id == equation.id })
+            }
+        
+        self.equationCalculationModels += addedEquations
+            .map { EquationCalculationModel(compilerService: compilerService, equation: $0) }
+    }
+    
+    private func didUpdate(selectedEquation: Equation) {
+        textView.string = selectedEquation.contents
+    }
+    
+    private func updateCurrentEquationContents(checkIsSameFirst: Bool = false) {
+        let selectedID = equationManagementService.selectedEquation.id
+        guard let calculationModel = equationCalculationModels.first(where: { $0.id == selectedID }) else {
+            return
         }
+        
+        if checkIsSameFirst, calculationModel.contents == textView.string {
+            return
+        }
+        
+        calculationModel.updateContents(contents: textView.string)
     }
     
     @objc
     private func compile() {
-        let text = textView.string
         do {
-            let libraryURL = try compilerService.compile(text: text)
-            execute(libraryURL: libraryURL)
+            let needsRecompilation = equationCalculationModels
+                .filter { $0.needsRecompilation }
+            
+            for equation in needsRecompilation {
+                try equation.compile()
+            }
+            
             graphViewContainer.display()
         } catch {
             print("Could not compile: \(error)")
         }
     }
     
-    private func execute(libraryURL: URL) {
-        self.calculationHandler = nil
-        self.dylibHandler?.close()
-        self.dylibHandler = nil
-        
-        let dylibHandler = DynamicLibraryHandler(libraryURL: libraryURL)
-        guard let symbol = dylibHandler.symbol(named: "calculation") else {
-            Logger.log("Could not find required symbol.")
-            return
-        }
-        
-        typealias CalculationSignature = @convention(c)(Double) -> Double
-        let handler = unsafeBitCast(symbol, to: CalculationSignature.self)
-        
-        Logger.log("Found calculation symbol")
-        
-        self.dylibHandler = dylibHandler
-        self.calculationHandler = handler
+    @objc
+    private func didChangeText() {
+        updateCurrentEquationContents()
     }
-
+    
 }
 
 extension ViewController: GraphViewDataSource {
+    func numberOfGraphs(in graphView: GraphView) -> Int {
+        return equationCalculationModels.count
+    }
     
-    func graph(_ graphView: GraphView, valueForX x: Double) -> Double {
-        guard let calculationHandler else {
+    func graph(_ graphView: GraphView, showGraph graphIndex: Int) -> Bool {
+        guard
+            equationCalculationModels.indices.contains(graphIndex),
+            let model = Optional(equationCalculationModels[graphIndex]),
+            model.calculationHandler != nil
+        else {
+            return false
+        }
+        
+        return model.isEnabled
+    }
+    
+    func graph(_ graphView: GraphView, valueForGraph graphIndex: Int, x: Double) -> Double {
+        guard 
+            equationCalculationModels.indices.contains(graphIndex),
+            let model = Optional(equationCalculationModels[graphIndex]),
+            let calculationHandler = model.calculationHandler
+        else {
             return 0
         }
         
         return calculationHandler(x)
     }
+    
+    func graph(_ graphView: GraphView, colorForGraph graphIndex: Int) -> CGColor {
+        guard equationCalculationModels.indices.contains(graphIndex) else {
+            return .black
+        }
+        
+        let model = equationCalculationModels[graphIndex]
+        return model.color
+    }
+    
     
 }

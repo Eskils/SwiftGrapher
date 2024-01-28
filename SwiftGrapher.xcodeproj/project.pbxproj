@@ -16,6 +16,13 @@
 		7BA788A42B5158A600C52003 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA788A32B5158A600C52003 /* Logger.swift */; };
 		7BA788A62B516BB700C52003 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA788A52B516BB700C52003 /* GraphView.swift */; };
 		7BF833812B652CD9006712E9 /* TransformManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF833802B652CD9006712E9 /* TransformManager.swift */; };
+		7BF833832B654094006712E9 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF833822B654094006712E9 /* SidebarViewController.swift */; };
+		7BF833862B654127006712E9 /* Equation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF833852B654127006712E9 /* Equation.swift */; };
+		7BF833882B666864006712E9 /* EquationManagementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF833872B666864006712E9 /* EquationManagementService.swift */; };
+		7BF8338A2B666B49006712E9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF833892B666B49006712E9 /* Constants.swift */; };
+		7BF8338D2B666BBF006712E9 /* CGColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF8338C2B666BBF006712E9 /* CGColor+Extension.swift */; };
+		7BF8338F2B66831D006712E9 /* EquationCalculationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF8338E2B66831D006712E9 /* EquationCalculationModel.swift */; };
+		7BF833912B66BEFD006712E9 /* EquationCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF833902B66BEFD006712E9 /* EquationCellView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +37,13 @@
 		7BA788A32B5158A600C52003 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		7BA788A52B516BB700C52003 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		7BF833802B652CD9006712E9 /* TransformManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformManager.swift; sourceTree = "<group>"; };
+		7BF833822B654094006712E9 /* SidebarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
+		7BF833852B654127006712E9 /* Equation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equation.swift; sourceTree = "<group>"; };
+		7BF833872B666864006712E9 /* EquationManagementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquationManagementService.swift; sourceTree = "<group>"; };
+		7BF833892B666B49006712E9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		7BF8338C2B666BBF006712E9 /* CGColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGColor+Extension.swift"; sourceTree = "<group>"; };
+		7BF8338E2B66831D006712E9 /* EquationCalculationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquationCalculationModel.swift; sourceTree = "<group>"; };
+		7BF833902B66BEFD006712E9 /* EquationCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquationCellView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,12 +76,18 @@
 		7BA7888E2B51472700C52003 /* SwiftGrapher */ = {
 			isa = PBXGroup;
 			children = (
+				7BF8338B2B666BB1006712E9 /* Extensions */,
 				7BA7888F2B51472700C52003 /* AppDelegate.swift */,
+				7BF833822B654094006712E9 /* SidebarViewController.swift */,
+				7BF833902B66BEFD006712E9 /* EquationCellView.swift */,
 				7BA788912B51472700C52003 /* ViewController.swift */,
+				7BF8338E2B66831D006712E9 /* EquationCalculationModel.swift */,
+				7BF833892B666B49006712E9 /* Constants.swift */,
 				7BA788A32B5158A600C52003 /* Logger.swift */,
 				7BA788A12B5152EF00C52003 /* DynamicLibraryHandler.swift */,
 				7BA788A52B516BB700C52003 /* GraphView.swift */,
 				7BF833802B652CD9006712E9 /* TransformManager.swift */,
+				7BF833842B65411D006712E9 /* Models */,
 				7BA7889E2B51495600C52003 /* Services */,
 				7BA788932B51472A00C52003 /* Assets.xcassets */,
 				7BA788952B51472A00C52003 /* Main.storyboard */,
@@ -80,8 +100,25 @@
 			isa = PBXGroup;
 			children = (
 				7BA7889F2B51496800C52003 /* SwiftCompilerService.swift */,
+				7BF833872B666864006712E9 /* EquationManagementService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		7BF833842B65411D006712E9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7BF833852B654127006712E9 /* Equation.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7BF8338B2B666BB1006712E9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7BF8338C2B666BBF006712E9 /* CGColor+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,12 +192,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BA788A42B5158A600C52003 /* Logger.swift in Sources */,
+				7BF8338A2B666B49006712E9 /* Constants.swift in Sources */,
+				7BF833912B66BEFD006712E9 /* EquationCellView.swift in Sources */,
 				7BA788A02B51496800C52003 /* SwiftCompilerService.swift in Sources */,
+				7BF833862B654127006712E9 /* Equation.swift in Sources */,
 				7BA788922B51472700C52003 /* ViewController.swift in Sources */,
 				7BA788A22B5152EF00C52003 /* DynamicLibraryHandler.swift in Sources */,
 				7BA788902B51472700C52003 /* AppDelegate.swift in Sources */,
+				7BF833882B666864006712E9 /* EquationManagementService.swift in Sources */,
 				7BF833812B652CD9006712E9 /* TransformManager.swift in Sources */,
 				7BA788A62B516BB700C52003 /* GraphView.swift in Sources */,
+				7BF833832B654094006712E9 /* SidebarViewController.swift in Sources */,
+				7BF8338D2B666BBF006712E9 /* CGColor+Extension.swift in Sources */,
+				7BF8338F2B66831D006712E9 /* EquationCalculationModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

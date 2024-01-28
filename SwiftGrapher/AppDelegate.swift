@@ -10,8 +10,14 @@ import Cocoa
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    
+    var equationManagementService: EquationManagementService
+    var compilerService: SwiftCompilerService
 
+    override init() {
+        self.equationManagementService = EquationManagementServiceImpl()
+        self.compilerService = SwiftCompilerServiceImpl()
+        super.init()
+    }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
