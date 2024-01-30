@@ -52,8 +52,8 @@ final class EquationCellView: NSView {
         isEnabledCheckbox.target = self
         isEnabledCheckbox.action = #selector(didChangeIsEnabled)
         
-        nameLabel.target = self
-        nameLabel.action = #selector(didTapLabel)
+        let clickGestureRecognizer = NSClickGestureRecognizer(target: self, action: #selector(didTapLabel))
+        nameLabel.addGestureRecognizer(clickGestureRecognizer)
         
         NotificationCenter.default.addObserver(
             self,
