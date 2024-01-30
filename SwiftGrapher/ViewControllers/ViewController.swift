@@ -23,15 +23,14 @@ class ViewController: NSViewController {
     
     var equationCalculationModels = [EquationCalculationModel]()
     
-    required init?(coder: NSCoder) {
-        guard let delegate = NSApp.delegate as? AppDelegate else {
-            assertionFailure()
-            return nil
-        }
-        
-        self.compilerService = delegate.compilerService
-        self.equationManagementService = delegate.equationManagementService
+    required init?(coder: NSCoder, compilerService: SwiftCompilerService, equationManagementService: EquationManagementService) {
+        self.compilerService = compilerService
+        self.equationManagementService = equationManagementService
         super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     deinit {

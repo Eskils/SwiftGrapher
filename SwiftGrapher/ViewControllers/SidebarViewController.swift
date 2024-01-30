@@ -20,14 +20,13 @@ final class SidebarViewController: NSViewController {
     
     @IBOutlet var tableView: NSTableView!
     
-    required init?(coder: NSCoder) {
-        guard let delegate = NSApp.delegate as? AppDelegate else {
-            assertionFailure()
-            return nil
-        }
-        
-        self.equationManagementService = delegate.equationManagementService
+    required init?(coder: NSCoder, equationManagementService: EquationManagementService) {
+        self.equationManagementService = equationManagementService
         super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {

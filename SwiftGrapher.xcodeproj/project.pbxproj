@@ -25,6 +25,10 @@
 		7BF833912B66BEFD006712E9 /* EquationCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF833902B66BEFD006712E9 /* EquationCellView.swift */; };
 		7BF833932B66FF38006712E9 /* StaticallyDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF833922B66FF38006712E9 /* StaticallyDecodable.swift */; };
 		7BF833962B66FF61006712E9 /* CGColorSpace+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF833952B66FF61006712E9 /* CGColorSpace+Extension.swift */; };
+		7BF8339C2B694DCB006712E9 /* GraphCollectionDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF8339B2B694DCB006712E9 /* GraphCollectionDocument.swift */; };
+		7BF833A02B69664E006712E9 /* MessagePack in Frameworks */ = {isa = PBXBuildFile; productRef = 7BF8339F2B69664E006712E9 /* MessagePack */; };
+		7BF833A32B6966FA006712E9 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF833A22B6966FA006712E9 /* WindowController.swift */; };
+		7BF833A52B696837006712E9 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF833A42B696837006712E9 /* SplitViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +52,10 @@
 		7BF833902B66BEFD006712E9 /* EquationCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquationCellView.swift; sourceTree = "<group>"; };
 		7BF833922B66FF38006712E9 /* StaticallyDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticallyDecodable.swift; sourceTree = "<group>"; };
 		7BF833952B66FF61006712E9 /* CGColorSpace+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGColorSpace+Extension.swift"; sourceTree = "<group>"; };
+		7BF8339B2B694DCB006712E9 /* GraphCollectionDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphCollectionDocument.swift; sourceTree = "<group>"; };
+		7BF8339D2B695A6E006712E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		7BF833A22B6966FA006712E9 /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
+		7BF833A42B696837006712E9 /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BF833A02B69664E006712E9 /* MessagePack in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,12 +89,14 @@
 		7BA7888E2B51472700C52003 /* SwiftGrapher */ = {
 			isa = PBXGroup;
 			children = (
+				7BF8339D2B695A6E006712E9 /* Info.plist */,
 				7BA7888F2B51472700C52003 /* AppDelegate.swift */,
 				7BF833892B666B49006712E9 /* Constants.swift */,
 				7BF8338B2B666BB1006712E9 /* Extensions */,
 				7BF833992B66FFB5006712E9 /* Helpers */,
 				7BF833972B66FF9C006712E9 /* Cells */,
 				7BF8339A2B66FFCC006712E9 /* Views */,
+				7BF833A12B6966E6006712E9 /* WindowControllers */,
 				7BF833982B66FFA6006712E9 /* ViewControllers */,
 				7BF833942B66FF40006712E9 /* Types */,
 				7BF833842B65411D006712E9 /* Models */,
@@ -110,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				7BF833852B654127006712E9 /* Equation.swift */,
+				7BF8339B2B694DCB006712E9 /* GraphCollectionDocument.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -144,6 +156,7 @@
 			children = (
 				7BF833822B654094006712E9 /* SidebarViewController.swift */,
 				7BA788912B51472700C52003 /* ViewController.swift */,
+				7BF833A42B696837006712E9 /* SplitViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -167,6 +180,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		7BF833A12B6966E6006712E9 /* WindowControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7BF833A22B6966FA006712E9 /* WindowController.swift */,
+			);
+			path = WindowControllers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -183,6 +204,9 @@
 			dependencies = (
 			);
 			name = SwiftGrapher;
+			packageProductDependencies = (
+				7BF8339F2B69664E006712E9 /* MessagePack */,
+			);
 			productName = SwiftGrapher;
 			productReference = 7BA7888C2B51472700C52003 /* SwiftGrapher.app */;
 			productType = "com.apple.product-type.application";
@@ -211,6 +235,9 @@
 				Base,
 			);
 			mainGroup = 7BA788832B51472700C52003;
+			packageReferences = (
+				7BF8339E2B69664E006712E9 /* XCRemoteSwiftPackageReference "MessagePack" */,
+			);
 			productRefGroup = 7BA7888D2B51472700C52003 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -244,14 +271,17 @@
 				7BF833962B66FF61006712E9 /* CGColorSpace+Extension.swift in Sources */,
 				7BF833862B654127006712E9 /* Equation.swift in Sources */,
 				7BA788922B51472700C52003 /* ViewController.swift in Sources */,
+				7BF8339C2B694DCB006712E9 /* GraphCollectionDocument.swift in Sources */,
 				7BA788A22B5152EF00C52003 /* DynamicLibraryHandler.swift in Sources */,
 				7BA788902B51472700C52003 /* AppDelegate.swift in Sources */,
 				7BF833882B666864006712E9 /* EquationManagementService.swift in Sources */,
 				7BF833812B652CD9006712E9 /* TransformManager.swift in Sources */,
 				7BA788A62B516BB700C52003 /* GraphView.swift in Sources */,
+				7BF833A32B6966FA006712E9 /* WindowController.swift in Sources */,
 				7BF833832B654094006712E9 /* SidebarViewController.swift in Sources */,
 				7BF8338D2B666BBF006712E9 /* CGColor+Extension.swift in Sources */,
 				7BF8338F2B66831D006712E9 /* EquationCalculationModel.swift in Sources */,
+				7BF833A52B696837006712E9 /* SplitViewController.swift in Sources */,
 				7BF833932B66FF38006712E9 /* StaticallyDecodable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -400,6 +430,7 @@
 				DEVELOPMENT_TEAM = EUKTZ7725R;
 				ENABLE_HARDENED_RUNTIME = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SwiftGrapher/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -428,6 +459,7 @@
 				DEVELOPMENT_TEAM = EUKTZ7725R;
 				ENABLE_HARDENED_RUNTIME = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SwiftGrapher/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -466,6 +498,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7BF8339E2B69664E006712E9 /* XCRemoteSwiftPackageReference "MessagePack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Flight-School/MessagePack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7BF8339F2B69664E006712E9 /* MessagePack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7BF8339E2B69664E006712E9 /* XCRemoteSwiftPackageReference "MessagePack" */;
+			productName = MessagePack;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7BA788842B51472700C52003 /* Project object */;
 }

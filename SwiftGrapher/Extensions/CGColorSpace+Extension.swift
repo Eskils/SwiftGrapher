@@ -18,18 +18,22 @@ extension CGColorSpace: Encodable, StaticallyDecodable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         let data = self.copyICCData() as? Data
         
-        try container.encodeIfPresent(data, forKey: .iccData)
-        try container.encodeIfPresent(name as? String , forKey: .name)
+        if let name {
+            try container.encode(name as String, forKey: .name)
+        } else {
+            try container.encodeIfPresent(data, forKey: .iccData)
+        }
+        
     }
     
     static func from(decoder: Decoder) throws -> Self {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        if let iccData = try container.decodeIfPresent(Data.self, forKey: .iccData),
+        if let name = try container.decodeIfPresent(String.self, forKey: .name),
+           let colorSpace = CGColorSpace(name: name as CFString) as? Self {
+            return colorSpace
+        } else if let iccData = try container.decodeIfPresent(Data.self, forKey: .iccData),
            let cfData = Optional(iccData as CFData),
            let colorSpace = CGColorSpace(iccData: cfData) as? Self {
-            return colorSpace
-        } else if let name = try container.decodeIfPresent(String.self, forKey: .name),
-                  let colorSpace = CGColorSpace(name: name as CFString) as? Self {
             return colorSpace
         }
         

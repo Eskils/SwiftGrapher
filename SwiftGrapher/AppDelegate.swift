@@ -7,14 +7,12 @@
 
 import Cocoa
 
-@main
+@NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    var equationManagementService: EquationManagementService
     var compilerService: SwiftCompilerService
 
     override init() {
-        self.equationManagementService = EquationManagementServiceImpl()
         self.compilerService = SwiftCompilerServiceImpl()
         super.init()
     }
