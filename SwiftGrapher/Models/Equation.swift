@@ -9,45 +9,6 @@ import Foundation
 import CoreGraphics
 import Combine
 
-final class GraphCollection: Encodable, Decodable {
-    
-    var equations: [Equation] {
-        didSet {
-            equationsPublisher.send(equations)
-        }
-    }
-    
-    var equationsPublisher = CurrentValueSubject<[Equation], Never>([])
-    
-    init(equations: [Equation]) {
-        self.equations = equations
-    }
-    
-    func addEquation() {
-        equations.append(.emptyWithRandomColor())
-    }
-    
-    static func newWithSingleEquation() -> GraphCollection {
-        GraphCollection(equations: [.emptyWithRandomColor()])
-    }
-    
-//    func encode(to encoder: Encoder) throws {
-//        var container = encoder.container(keyedBy: CodingKeys.self)
-//        
-//        try container.encode(equations, forKey: .equations)
-//    }
-//    
-//    required init(from decoder: Decoder) throws {
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        
-//        self.equations = try container.decode([Equation].self, forKey: .equations)
-//    }
-//    
-    enum CodingKeys: String, CodingKey {
-        case equations
-    }
-}
-
 class Equation: Encodable, Decodable, Equatable {
     let id: String
     

@@ -7,6 +7,7 @@
 
 import AppKit
 import MessagePacker
+import Compression
 
 final class GraphCollectionDocument: NSDocument {
     
@@ -17,6 +18,8 @@ final class GraphCollectionDocument: NSDocument {
     private let encoder = MessagePackEncoder()
     
     private let decoder = MessagePackDecoder()
+    
+    private let compressionPageSize = 1024
     
     override init() {
         super.init()
@@ -51,11 +54,59 @@ final class GraphCollectionDocument: NSDocument {
     }
     
     override func read(from data: Data, ofType typeName: String) throws {
-        self.graphCollection = try decoder.decode(GraphCollection.self, from: data)
+        let uncompressed = try decompress(data: data)
+        self.graphCollection = try decoder.decode(GraphCollection.self, from: uncompressed)
     }
     
     override func data(ofType typeName: String) throws -> Data {
-        try encoder.encode(graphCollection)
+        let encoded = try encoder.encode(graphCollection)
+        let compressed = try compress(data: encoded)
+        return compressed
     }
+    
+    func compress(data input: Data) throws -> Data {
+            var dest = Data()
+            let outputFilter = try OutputFilter(.compress, using: .lzfse, writingTo: { data in
+                if let data = data { dest.append(data) }
+            })
+            
+            var index = 0
+            let inputSize = input.count
+            let pageSize = self.compressionPageSize
+            
+            while true {
+                let readLength = min(pageSize, inputSize - index)
+                
+                let subdata = input.subdata(in: index..<index + readLength)
+                try outputFilter.write(subdata)
+                
+                index += readLength
+                if readLength == 0 { break }
+            }
+            
+            return dest
+        }
+        
+        func decompress(data input: Data) throws -> Data {
+            var dest = Data()
+            
+            var index = 0
+            let inputSize = input.count
+            let pageSize = self.compressionPageSize
+            
+            let inputFilter = try InputFilter<Data>(.decompress, using: .lzfse, readingFrom: { length in
+                let readLength = min(length, inputSize - index)
+                let subdata = input.subdata(in: index..<index + readLength)
+                
+                index += readLength
+                return subdata
+            })
+            
+            while let page = try inputFilter.readData(ofLength: pageSize) {
+                dest.append(page)
+            }
+            
+            return dest
+        }
     
 }

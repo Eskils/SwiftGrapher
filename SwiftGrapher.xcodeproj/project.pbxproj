@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7B7197D32B6D33880080BBE5 /* MessagePacker in Frameworks */ = {isa = PBXBuildFile; productRef = 7B7197D22B6D33880080BBE5 /* MessagePacker */; };
+		7B7197D52B6D39480080BBE5 /* GraphCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7197D42B6D39480080BBE5 /* GraphCollection.swift */; };
 		7BA788902B51472700C52003 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA7888F2B51472700C52003 /* AppDelegate.swift */; };
 		7BA788922B51472700C52003 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA788912B51472700C52003 /* ViewController.swift */; };
 		7BA788942B51472A00C52003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BA788932B51472A00C52003 /* Assets.xcassets */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7B7197D42B6D39480080BBE5 /* GraphCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphCollection.swift; sourceTree = "<group>"; };
 		7BA7888C2B51472700C52003 /* SwiftGrapher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftGrapher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BA7888F2B51472700C52003 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BA788912B51472700C52003 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				7BF833852B654127006712E9 /* Equation.swift */,
+				7B7197D42B6D39480080BBE5 /* GraphCollection.swift */,
 				7BF8339B2B694DCB006712E9 /* GraphCollectionDocument.swift */,
 			);
 			path = Models;
@@ -274,6 +277,7 @@
 				7BF8339C2B694DCB006712E9 /* GraphCollectionDocument.swift in Sources */,
 				7BA788A22B5152EF00C52003 /* DynamicLibraryHandler.swift in Sources */,
 				7BA788902B51472700C52003 /* AppDelegate.swift in Sources */,
+				7B7197D52B6D39480080BBE5 /* GraphCollection.swift in Sources */,
 				7BF833882B666864006712E9 /* EquationManagementService.swift in Sources */,
 				7BF833812B652CD9006712E9 /* TransformManager.swift in Sources */,
 				7BA788A62B516BB700C52003 /* GraphView.swift in Sources */,
