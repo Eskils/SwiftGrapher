@@ -23,8 +23,11 @@ protocol EquationManagementService: AnyObject {
 
 final class EquationManagementServiceImpl: EquationManagementService {
     
-    @Published
-    private(set) var graphCollection: GraphCollection
+    private(set) var graphCollection: GraphCollection {
+        didSet {
+            graphCollection.equationsPublisher.assign(to: &$equations)
+        }
+    }
     
 //    var equations: [Equation] {
 //        graphCollection.equations
@@ -50,23 +53,13 @@ final class EquationManagementServiceImpl: EquationManagementService {
         
         selectedEquation = initialEquation
         
-        graphCollection.equationsPublisher.assign(to: &$equations)
-        
-        graphCollection.equationsPublisher
+        $equations
             .sink(receiveValue: didUpdate(equations:))
-            .store(in: &cancellables)
-        
-        $graphCollection
-            .sink(receiveValue: didUpdate(graphCollection:))
             .store(in: &cancellables)
     }
     
     private func didUpdate(equations: [Equation]) {
-        print("Did update equations")
-    }
-    
-    private func didUpdate(graphCollection: GraphCollection) {
-        print("Did update graph collections")
+        print("Did update equations \(equations.count)")
     }
     
     func addEquation() {

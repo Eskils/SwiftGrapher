@@ -6,7 +6,7 @@
 //
 
 import AppKit
-import MessagePack
+import MessagePacker
 
 final class GraphCollectionDocument: NSDocument {
     

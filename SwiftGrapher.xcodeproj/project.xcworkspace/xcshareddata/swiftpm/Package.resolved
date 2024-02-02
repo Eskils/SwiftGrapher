@@ -1,12 +1,12 @@
 {
   "pins" : [
     {
-      "identity" : "messagepack",
+      "identity" : "messagepacker",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Flight-School/MessagePack",
+      "location" : "https://github.com/hirotakan/MessagePacker.git",
       "state" : {
-        "revision" : "bbc5ab6362db234f2051e73e67296ebf5c3d2042",
-        "version" : "1.2.4"
+        "revision" : "4d8346c6bc579347e4df0429493760691c5aeca2",
+        "version" : "0.4.7"
       }
     }
   ],

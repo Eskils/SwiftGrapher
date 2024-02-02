@@ -9,7 +9,7 @@ import Foundation
 import CoreGraphics
 import Combine
 
-class GraphCollection: Encodable, Decodable {
+final class GraphCollection: Encodable, Decodable {
     
     var equations: [Equation] {
         didSet {
