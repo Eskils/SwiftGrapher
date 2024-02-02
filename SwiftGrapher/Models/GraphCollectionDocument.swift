@@ -29,6 +29,8 @@ final class GraphCollectionDocument: NSDocument {
         return true
     }
     
+    
+    
     override func canAsynchronouslyWrite(to url: URL, ofType typeName: String, for saveOperation: NSDocument.SaveOperationType) -> Bool {
         return true
     }
