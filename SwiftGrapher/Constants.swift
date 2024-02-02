@@ -15,7 +15,6 @@ struct Constants {
     """
     import Foundation
     
-    @_cdecl("calculation")
     public func calculation(x: Double) -> Double {
         return 100 * sin(x)
     }

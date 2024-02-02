@@ -65,7 +65,7 @@ final class EquationCalculationModel {
         self.dylibHandler = nil
         
         let dylibHandler = DynamicLibraryHandler(libraryURL: libraryURL)
-        guard let symbol = dylibHandler.symbol(named: "calculation") else {
+        guard let symbol = dylibHandler.symbol(named: "$s4main11calculation1xS2d_tF") else {
             Logger.log("Could not find required symbol.")
             return
         }
