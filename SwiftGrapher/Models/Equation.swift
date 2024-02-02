@@ -48,7 +48,7 @@ final class GraphCollection: Encodable, Decodable {
     }
 }
 
-class Equation: Encodable, Decodable {
+class Equation: Encodable, Decodable, Equatable {
     let id: String
     
     var name: String?
@@ -88,6 +88,10 @@ class Equation: Encodable, Decodable {
         self.color = try container.decodeStatically(CGColor.self, forKey: .color)
         self.isEnabled = try container.decode(Bool.self, forKey: .isEnabled)
         self.contents = try container.decode(String.self, forKey: .contents)
+    }
+    
+    static func == (lhs: Equation, rhs: Equation) -> Bool {
+        lhs.id == rhs.id
     }
     
 }

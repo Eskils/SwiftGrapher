@@ -26,15 +26,14 @@ final class EquationManagementServiceImpl: EquationManagementService {
     private(set) var graphCollection: GraphCollection {
         didSet {
             graphCollection.equationsPublisher.assign(to: &$equations)
+            self.equations = graphCollection.equations
+            
+            if !graphCollection.equations.contains(self.selectedEquation),
+               let firstEquation = graphCollection.equations.first {
+                selectedEquation = firstEquation
+            }
         }
     }
-    
-//    var equations: [Equation] {
-//        graphCollection.equations
-//    }
-//    
-//    var equationsPublisher: Published<[Equation]>.Publisher { graphCollection.$equations
-//    }
     
     @Published
     private(set) var equations: [Equation] = []
@@ -52,14 +51,6 @@ final class EquationManagementServiceImpl: EquationManagementService {
         self.graphCollection = GraphCollection(equations: [initialEquation])
         
         selectedEquation = initialEquation
-        
-        $equations
-            .sink(receiveValue: didUpdate(equations:))
-            .store(in: &cancellables)
-    }
-    
-    private func didUpdate(equations: [Equation]) {
-        print("Did update equations \(equations.count)")
     }
     
     func addEquation() {
