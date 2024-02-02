@@ -16,7 +16,13 @@ final class WindowController: NSWindowController {
     }
     
     override func windowDidLoad() {
+        self.shouldCascadeWindows = true
         self.contentViewController = makeSplitViewController()
+        
+        if let screenFrame = window?.screen?.frame {
+            let windowFrame = screenFrame.insetBy(dx: 50, dy: 100)
+            self.window?.setFrame(windowFrame, display: true)
+        }
     }
     
     private func makeSplitViewController() -> NSViewController {

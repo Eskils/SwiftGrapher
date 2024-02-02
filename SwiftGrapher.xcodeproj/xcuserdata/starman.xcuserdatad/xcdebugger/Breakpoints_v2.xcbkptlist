@@ -318,8 +318,8 @@
             filePath = "SwiftGrapher/WindowControllers/WindowController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
             landmarkName = "makeSplitViewController()"
             landmarkType = "7">
          </BreakpointContent>
