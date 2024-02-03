@@ -20,7 +20,7 @@ final class DynamicLibraryHandler {
         Logger.log("Opening library at \(libraryURL.path())")
         
         libraryAddress = libraryURL.path().withCString { libraryPath in
-            dlopen(libraryPath, RTLD_LAZY)
+            dlopen(libraryPath, RTLD_GLOBAL)
         }
     }
     

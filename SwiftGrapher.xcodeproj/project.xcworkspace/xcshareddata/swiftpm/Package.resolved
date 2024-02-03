@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "messagepacker",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hirotakan/MessagePacker.git",
+      "state" : {
+        "revision" : "4d8346c6bc579347e4df0429493760691c5aeca2",
+        "version" : "0.4.7"
+      }
+    }
+  ],
+  "version" : 2
+}

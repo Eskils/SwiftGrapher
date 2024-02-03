@@ -30,7 +30,22 @@ final class GraphView: TransformManager {
         NSBezierPath(cgPath: horizontalBarPath).stroke()
     }
     
-    private func drawFunction() {
+    private func drawFunctions() {
+        guard let dataSource else {
+            return
+        }
+        
+        let numberOfFunctions = dataSource.numberOfGraphs(in: self)
+        for index in 0..<numberOfFunctions {
+            if !dataSource.graph(self, showGraph: index) {
+                continue
+            }
+            
+            drawFunction(withIndex: index)
+        }
+    }
+    
+    private func drawFunction(withIndex index: Int) {
         guard let dataSource else {
             return
         }
@@ -64,7 +79,7 @@ final class GraphView: TransformManager {
                 drawX += drawDelta
             }
             
-            let y = scale * dataSource.graph(self, valueForX: x) + transformAnchorPoint.y * height + translation.y
+            let y = scale * dataSource.graph(self, valueForGraph: index, x: x) + transformAnchorPoint.y * height + translation.y
             let point = CGPoint(x: drawX, y: y)
             
             // FIXME: Use vertical asymptotic analysis to determine
@@ -97,7 +112,8 @@ final class GraphView: TransformManager {
             }
         }
         
-        NSColor.systemBlue.setStroke()
+        let color = dataSource.graph(self, colorForGraph: index)
+        NSColor(cgColor: color)?.setStroke()
         let functionNS = NSBezierPath(cgPath: functionPath)
         functionNS.lineWidth = 2
         functionNS.stroke()
@@ -112,14 +128,17 @@ final class GraphView: TransformManager {
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
         
-        drawAxes()
-        drawFunction()
+        drawAxes() 
+        drawFunctions()
     }
     
 }
 
 protocol GraphViewDataSource: AnyObject {
     
-    func graph(_ graphView: GraphView, valueForX x: Double) -> Double
+    func numberOfGraphs(in graphView: GraphView) -> Int
+    func graph(_ graphView: GraphView, valueForGraph graphIndex: Int, x: Double) -> Double
+    func graph(_ graphView: GraphView, colorForGraph graphIndex: Int) -> CGColor
+    func graph(_ graphView: GraphView, showGraph graphIndex: Int) -> Bool
     
 }

@@ -7,11 +7,15 @@
 
 import Cocoa
 
-@main
+@NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    
+    var compilerService: SwiftCompilerService
 
+    override init() {
+        self.compilerService = SwiftCompilerServiceImpl()
+        super.init()
+    }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application

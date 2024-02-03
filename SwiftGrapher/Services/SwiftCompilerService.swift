@@ -7,6 +7,7 @@
 
 import Foundation
 
+@objc
 protocol SwiftCompilerService: AnyObject {
     func compile(text: String) throws -> URL
 }
