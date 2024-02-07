@@ -484,5 +484,181 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F8BE66F7-D74D-4535-8D94-6E684F00A126"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftGrapher/Helpers/DynamicLibraryHandler.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "init(libraryURL:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7F23266D-699B-42BD-AE40-9A3E5F3CB163"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftGrapher/Helpers/DynamicLibraryHandler.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "init(libraryURL:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "56CF09C0-5A40-42AF-91ED-13C256541937"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftGrapher/Helpers/DynamicLibraryHandler.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "symbol(named:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "56CF09C0-5A40-42AF-91ED-13C256541937 - 7c3fce84f3bd3d64"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftGrapher.DynamicLibraryHandler.symbol(named: Swift.String) -&gt; Swift.Optional&lt;Swift.UnsafeMutableRawPointer&gt;"
+                  moduleName = "SwiftGrapher"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/starman/Documents/Projects/SwiftGrapher/SwiftGrapher/Helpers/DynamicLibraryHandler.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "172">
+               </Location>
+               <Location
+                  uuid = "56CF09C0-5A40-42AF-91ED-13C256541937 - 6a10641d37a17d83"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.UnsafePointer&lt;Swift.Int8&gt;) -&gt; Swift.Optional&lt;Swift.UnsafeMutableRawPointer&gt; in SwiftGrapher.DynamicLibraryHandler.symbol(named: Swift.String) -&gt; Swift.Optional&lt;Swift.UnsafeMutableRawPointer&gt;"
+                  moduleName = "SwiftGrapher"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/starman/Documents/Projects/SwiftGrapher/SwiftGrapher/Helpers/DynamicLibraryHandler.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "64">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F2CD34A5-D9C0-44C3-82B7-4876ED5D137B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftGrapher/ViewControllers/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
+            landmarkName = "didChangeText()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F2CD34A5-D9C0-44C3-82B7-4876ED5D137B - c2fc02260518539f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftGrapher.ViewController.didChangeText() -&gt; ()"
+                  moduleName = "SwiftGrapher"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/starman/Documents/Projects/SwiftGrapher/SwiftGrapher/ViewControllers/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "143"
+                  endingLineNumber = "143"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "F2CD34A5-D9C0-44C3-82B7-4876ED5D137B - c2fc02260518539f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftGrapher.ViewController.didChangeText() -&gt; ()"
+                  moduleName = "SwiftGrapher"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/starman/Documents/Projects/SwiftGrapher/SwiftGrapher/ViewControllers/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "143"
+                  endingLineNumber = "143"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7B88A618-4968-46C1-928E-1BF0829598F5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CodeEditSourceEditor/Sources/CodeEditSourceEditor/Controller/TextViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "lineNumberIndicesWithError"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "523B09B7-9EA3-4E38-B275-EF581B4E3DB4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CodeEditSourceEditor/Sources/CodeEditSourceEditor/Gutter/GutterView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
+            landmarkName = "drawErrorsOnLineNumbers(_:linePosition:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CEC77E6A-5DA6-4F60-9645-0380C029B32D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CodeEditSourceEditor/Sources/CodeEditSourceEditor/Gutter/GutterView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
+            landmarkName = "drawLineNumbers(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

@@ -36,7 +36,14 @@ final class SwiftCompilerServiceImpl: SwiftCompilerService {
         let outputData = try outPipe.fileHandleForReading.readToEnd()
         
         if let error = errorData.flatMap({ String(data: $0, encoding: .utf8) }) {
-            print("Error occured when compiling: \(error)")
+            var lines = error.split(separator: "\n")
+            print("Error occured when compiling: \(lines)")
+            lines.removeFirst() // Toolchain version
+            lines.removeFirst() // Target arch
+            if !lines.isEmpty {
+                let errorDescriptions = lines.compactMap(CompilationErrorDescription.fromCompilerOutput(text:))
+                throw ServiceError.compilationError(errorDescriptions)
+            }
         }
         
         if let output = outputData.flatMap({ String(data: $0, encoding: .utf8) }) {
@@ -87,5 +94,9 @@ final class SwiftCompilerServiceImpl: SwiftCompilerService {
         try stdError.fileHandleForWriting.close()
         
         return (stdError, stdOut)
+    }
+    
+    enum ServiceError: Error {
+        case compilationError([CompilationErrorDescription])
     }
 }

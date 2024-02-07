@@ -824,43 +824,9 @@
                             <splitView arrangesAllSubviews="NO" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AQl-7j-cxE">
                                 <rect key="frame" x="0.0" y="0.0" width="685" height="412"/>
                                 <subviews>
-                                    <customView id="kdH-5w-d6n">
+                                    <customView fixedFrame="YES" id="kdH-5w-d6n">
                                         <rect key="frame" x="0.0" y="0.0" width="345" height="412"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RD8-LP-9oZ">
-                                                <rect key="frame" x="0.0" y="0.0" width="345" height="412"/>
-                                                <clipView key="contentView" drawsBackground="NO" id="Iin-Vn-o2b">
-                                                    <rect key="frame" x="0.0" y="0.0" width="345" height="412"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <subviews>
-                                                        <textView wantsLayer="YES" importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="yaV-C8-bao">
-                                                            <rect key="frame" x="0.0" y="0.0" width="345" height="412"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                            <size key="minSize" width="345" height="412"/>
-                                                            <size key="maxSize" width="480" height="10000000"/>
-                                                            <color key="insertionPointColor" name="textInsertionPointColor" catalog="System" colorSpace="catalog"/>
-                                                        </textView>
-                                                    </subviews>
-                                                </clipView>
-                                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="967-hD-sEV">
-                                                    <rect key="frame" x="-100" y="-100" width="240" height="16"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </scroller>
-                                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="WG5-8j-o9n">
-                                                    <rect key="frame" x="329" y="0.0" width="16" height="412"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </scroller>
-                                            </scrollView>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="RD8-LP-9oZ" secondAttribute="trailing" id="4Ei-oe-xhh"/>
-                                            <constraint firstAttribute="bottom" secondItem="RD8-LP-9oZ" secondAttribute="bottom" id="M3o-eF-cSG"/>
-                                            <constraint firstItem="RD8-LP-9oZ" firstAttribute="leading" secondItem="kdH-5w-d6n" secondAttribute="leading" id="TnJ-Of-rgC"/>
-                                            <constraint firstItem="RD8-LP-9oZ" firstAttribute="top" secondItem="kdH-5w-d6n" secondAttribute="top" id="msG-ga-jZn"/>
-                                        </constraints>
                                     </customView>
                                     <customView id="krF-lQ-qwv">
                                         <rect key="frame" x="346" y="0.0" width="339" height="412"/>
@@ -903,7 +869,7 @@
                     <connections>
                         <outlet property="compileButton" destination="ykI-wm-ZSF" id="qIT-pp-eBD"/>
                         <outlet property="graphViewContainer" destination="VKM-3Z-wok" id="q9C-xE-CTi"/>
-                        <outlet property="textView" destination="yaV-C8-bao" id="PfC-lC-Gge"/>
+                        <outlet property="textViewContainer" destination="kdH-5w-d6n" id="6Qf-hz-wc8"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
