@@ -7,6 +7,8 @@
 
 import Cocoa
 import Combine
+import CodeEditSourceEditor
+import CodeEditTextView
 
 class ViewController: NSViewController {
     
@@ -15,13 +17,36 @@ class ViewController: NSViewController {
     
     var cancellables = Set<AnyCancellable>()
 
-    @IBOutlet var textView: NSTextView!
+    @IBOutlet var textViewContainer: NSView!
+    
+    let textViewController = TextViewController(
+        string: "",
+        language: .swift,
+        font: .monospacedSystemFont(ofSize: 14, weight: .regular),
+        theme: DefaultSourceEditorTheme(),
+        tabWidth: 4,
+        indentOption: .spaces(count: 4),
+        lineHeight: 1,
+        wrapLines: true,
+        cursorPositions: [],
+        editorOverscroll: 100,
+        useThemeBackground: true,
+        highlightProvider: nil,
+        contentInsets: nil,
+        isEditable: true,
+        isSelectable: true,
+        letterSpacing: 0,
+        bracketPairHighlight: nil,
+        undoManager: nil
+    )
     
     @IBOutlet var compileButton: NSButtonCell!
     
     @IBOutlet var graphViewContainer: GraphView!
     
     var equationCalculationModels = [EquationCalculationModel]()
+    
+    private var compilationErrors = [Int: CompilationErrorDescription]()
     
     required init?(coder: NSCoder, compilerService: SwiftCompilerService, equationManagementService: EquationManagementService) {
         self.compilerService = compilerService
@@ -40,15 +65,20 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        textView.string = ""
-        textView.font = .monospacedSystemFont(ofSize: 14, weight: .regular)
-        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(didChangeText),
-            name: NSTextView.didChangeNotification,
-            object: textView
+            name: TextView.textDidChangeNotification,
+            object: textViewController.textView
         )
+        
+        textViewContainer.addSubview(textViewController.view)
+        NSLayoutConstraint.activate([
+            textViewController.view.topAnchor.constraint(equalTo: textViewContainer.topAnchor),
+            textViewController.view.bottomAnchor.constraint(equalTo: textViewContainer.bottomAnchor),
+            textViewController.view.leadingAnchor.constraint(equalTo: textViewContainer.leadingAnchor),
+            textViewController.view.trailingAnchor.constraint(equalTo: textViewContainer.trailingAnchor),
+        ])
 
         compileButton.target = self
         compileButton.action = #selector(compile)
@@ -78,7 +108,7 @@ class ViewController: NSViewController {
     }
     
     private func didUpdate(selectedEquation: Equation) {
-        textView.string = selectedEquation.contents
+        textViewController.setText(selectedEquation.contents)
     }
     
     private func updateCurrentEquationContents(checkIsSameFirst: Bool = false) {
@@ -87,11 +117,11 @@ class ViewController: NSViewController {
             return
         }
         
-        if checkIsSameFirst, calculationModel.contents == textView.string {
+        if checkIsSameFirst, calculationModel.contents == textViewController.string {
             return
         }
         
-        calculationModel.updateContents(contents: textView.string)
+        calculationModel.updateContents(contents: textViewController.string)
     }
     
     @objc
@@ -100,14 +130,38 @@ class ViewController: NSViewController {
             let needsRecompilation = equationCalculationModels
                 .filter { $0.needsRecompilation }
             
+            var errors = [CompilationErrorDescription]()
+            
             for equation in needsRecompilation {
-                try equation.compile()
+                do {
+                    try equation.compile()
+                } catch {
+                    if let error = error as? SwiftCompilerServiceImpl.ServiceError,
+                       case .compilationError(let compileErrors) = error {
+                        errors += compileErrors
+                        continue
+                    }
+                    
+                    throw error
+                }
             }
+            
+            updateCompilationErrors(errors: errors)
             
             graphViewContainer.display()
         } catch {
             print("Could not compile: \(error)")
         }
+    }
+    
+    private func updateCompilationErrors(errors: [CompilationErrorDescription]) {
+        self.compilationErrors = errors.reduce(into: [Int: CompilationErrorDescription]()) { partialResult, error in
+            partialResult[error.lineNumberIndex] = error
+        }
+        
+        let errorLineNumberIndices = Set(compilationErrors.keys)
+        
+        textViewController.lineNumberIndicesWithError = errorLineNumberIndices
     }
     
     @objc
