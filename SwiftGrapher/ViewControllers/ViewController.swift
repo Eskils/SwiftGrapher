@@ -7,8 +7,12 @@
 
 import Cocoa
 import Combine
-import CodeEditSourceEditor
-import CodeEditTextView
+import STTextView
+import STAnnotationsPlugin
+import NeonPlugin
+import TextFormation
+import TextFormationPlugin
+import SwiftUI
 
 class ViewController: NSViewController {
     
@@ -19,26 +23,9 @@ class ViewController: NSViewController {
 
     @IBOutlet var textViewContainer: NSView!
     
-    let textViewController = TextViewController(
-        string: "",
-        language: .swift,
-        font: .monospacedSystemFont(ofSize: 14, weight: .regular),
-        theme: DefaultSourceEditorTheme(),
-        tabWidth: 4,
-        indentOption: .spaces(count: 4),
-        lineHeight: 1,
-        wrapLines: true,
-        cursorPositions: [],
-        editorOverscroll: 100,
-        useThemeBackground: true,
-        highlightProvider: nil,
-        contentInsets: nil,
-        isEditable: true,
-        isSelectable: true,
-        letterSpacing: 0,
-        bracketPairHighlight: nil,
-        undoManager: nil
-    )
+    let textView: STTextView
+    
+    let textScrollView: NSScrollView
     
     @IBOutlet var compileButton: NSButtonCell!
     
@@ -48,9 +35,15 @@ class ViewController: NSViewController {
     
     private var compilationErrors = [Int: CompilationErrorDescription]()
     
+    lazy var annotationManager = STAnnotationsPlugin(dataSource: self)
+    
+    private var appearanceObserver: NSKeyValueObservation?
+    
     required init?(coder: NSCoder, compilerService: SwiftCompilerService, equationManagementService: EquationManagementService) {
         self.compilerService = compilerService
         self.equationManagementService = equationManagementService
+        self.textScrollView = STTextView.scrollableTextView()
+        self.textView = textScrollView.documentView as? STTextView ?? STTextView()
         super.init(coder: coder)
     }
     
@@ -60,24 +53,62 @@ class ViewController: NSViewController {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+        appearanceObserver = nil
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        textView.addPlugin(
+            NeonPlugin(theme: DefaultSourceEditorTheme(), language: .swift)
+        )
+        
+        textView.addPlugin(annotationManager)
+        
+        let filters = [
+            StandardOpenPairFilter(open: "{", close: "}"),
+            NewlineWithinPairFilter(open: "{", close: "}"),
+            NewlineProcessingFilter(),
+        ] as [Filter]
+        
+        let indenter = TextualIndenter()
+
+        let providers = WhitespaceProviders(
+            leadingWhitespace: indenter.substitionProvider(indentationUnit: "    ", width: 4),
+            trailingWhitespace: { _, _ in return "" }
+        )
+
+        textView.addPlugin(
+            TextFormationPlugin(filters: filters, whitespaceProviders: providers)
+        )
+        
+        textView.backgroundColor = .textBackgroundColor
+        
+        appearanceObserver = self.view.observe(\.effectiveAppearance) { [weak self] _, change in
+            self?.view.effectiveAppearance.performAsCurrentDrawingAppearance {
+                self?.textView.backgroundColor = .textBackgroundColor
+            }
+        }
+        
+        let rulerView = STLineNumberRulerView(textView: textView)
+        rulerView.highlightSelectedLine = true
+        textScrollView.verticalRulerView = rulerView
+        textScrollView.rulersVisible = true
+        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(didChangeText),
-            name: TextView.textDidChangeNotification,
-            object: textViewController.textView
+            name: STTextView.textDidChangeNotification,
+            object: textView
         )
         
-        textViewContainer.addSubview(textViewController.view)
+        textViewContainer.addSubview(textScrollView)
+        textScrollView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            textViewController.view.topAnchor.constraint(equalTo: textViewContainer.topAnchor),
-            textViewController.view.bottomAnchor.constraint(equalTo: textViewContainer.bottomAnchor),
-            textViewController.view.leadingAnchor.constraint(equalTo: textViewContainer.leadingAnchor),
-            textViewController.view.trailingAnchor.constraint(equalTo: textViewContainer.trailingAnchor),
+            textScrollView.topAnchor.constraint(equalTo: textViewContainer.topAnchor),
+            textScrollView.bottomAnchor.constraint(equalTo: textViewContainer.bottomAnchor),
+            textScrollView.leadingAnchor.constraint(equalTo: textViewContainer.leadingAnchor),
+            textScrollView.trailingAnchor.constraint(equalTo: textViewContainer.trailingAnchor),
         ])
 
         compileButton.target = self
@@ -108,7 +139,7 @@ class ViewController: NSViewController {
     }
     
     private func didUpdate(selectedEquation: Equation) {
-        textViewController.setText(selectedEquation.contents)
+        textView.string = selectedEquation.contents
     }
     
     private func updateCurrentEquationContents(checkIsSameFirst: Bool = false) {
@@ -117,11 +148,11 @@ class ViewController: NSViewController {
             return
         }
         
-        if checkIsSameFirst, calculationModel.contents == textViewController.string {
+        if checkIsSameFirst, calculationModel.contents == textView.string {
             return
         }
         
-        calculationModel.updateContents(contents: textViewController.string)
+        calculationModel.updateContents(contents: textView.string)
     }
     
     @objc
@@ -156,12 +187,13 @@ class ViewController: NSViewController {
     
     private func updateCompilationErrors(errors: [CompilationErrorDescription]) {
         self.compilationErrors = errors.reduce(into: [Int: CompilationErrorDescription]()) { partialResult, error in
+            if let previousResult = partialResult[error.lineNumberIndex], previousResult.errorKind == "error" {
+                return
+            }
+            
             partialResult[error.lineNumberIndex] = error
         }
-        
-        let errorLineNumberIndices = Set(compilationErrors.keys)
-        
-        textViewController.lineNumberIndicesWithError = errorLineNumberIndices
+        self.annotationManager.reloadAnnotations()
     }
     
     @objc
@@ -207,6 +239,35 @@ extension ViewController: GraphViewDataSource {
         
         let model = equationCalculationModels[graphIndex]
         return model.color
+    }
+    
+    
+}
+
+extension ViewController: STAnnotationsDataSource {
+    
+    func textView(_ textView: STTextView, viewForLineAnnotation lineAnnotation: any STLineAnnotation, textLineFragment: NSTextLineFragment, proposedViewFrame: CGRect) -> NSView? {
+        guard let annotation = lineAnnotation as? InlineAnnotation else {
+            return nil
+        }
+        
+        return STAnnotationView(frame: proposedViewFrame) {
+            InlineAnnotationView(annotation: annotation, proposedViewFrame: proposedViewFrame)
+        }
+    }
+    
+    func textViewAnnotations() -> [any STLineAnnotation] {
+        let annotations = compilationErrors.compactMap { (lineIndex, error) in
+            let location = textView.textContentManager.location(line: error.lineNumber, character: -1) ?? textView.textLayoutManager.location(textView.textLayoutManager.documentRange.endLocation, offsetBy: -1) ?? textView.textLayoutManager.documentRange.location
+            
+            return InlineAnnotation(
+                message: error.errorDescription,
+                kind: InlineAnnotationKind(rawValue: error.errorKind) ?? .error,
+                location: location
+            )
+        }
+        
+        return annotations
     }
     
     

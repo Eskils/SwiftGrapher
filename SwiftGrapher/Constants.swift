@@ -11,13 +11,16 @@ struct Constants {
     
     private init() {}
     
-    static let defaultEquationImplementation = 
-    """
-    import Foundation
-    
-    public func calculation(x: Double) -> Double {
-        return 100 * sin(x)
-    }
-    """
+    static let defaultEquationImplementation = {
+        guard
+            let url = Bundle.main.url(forResource: "DefaultEquation", withExtension: "txt"),
+            let data = try? Data(contentsOf: url),
+            let text = String(data: data, encoding: .utf8)
+        else {
+            return ""
+        }
+        
+        return text
+    }()
     
 }

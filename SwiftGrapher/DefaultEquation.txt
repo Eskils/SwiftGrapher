@@ -1,0 +1,5 @@
+import Foundation
+
+public func calculation(x: Double) -> Double {
+    return 100 * sin(x)
+}

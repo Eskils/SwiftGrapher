@@ -1,15 +1,6 @@
 {
   "pins" : [
     {
-      "identity" : "codeedittextview",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/CodeEditApp/CodeEditTextView.git",
-      "state" : {
-        "revision" : "6abce20f1827a3665a5159195157f592352e38b4",
-        "version" : "0.7.1"
-      }
-    },
-    {
       "identity" : "mainoffender",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mattmassicotte/MainOffender",
@@ -28,6 +19,15 @@
       }
     },
     {
+      "identity" : "neon",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ChimeHQ/Neon.git",
+      "state" : {
+        "revision" : "7df7d080a271cfa4dc87f94cccc024665a75047e",
+        "version" : "0.6.0"
+      }
+    },
+    {
       "identity" : "rearrange",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ChimeHQ/Rearrange",
@@ -37,21 +37,48 @@
       }
     },
     {
-      "identity" : "swift-collections",
+      "identity" : "sttextkitplus",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-collections.git",
+      "location" : "https://github.com/krzyzanowskim/STTextKitPlus",
       "state" : {
-        "revision" : "d029d9d39c87bed85b1c50adee7c41795261a192",
-        "version" : "1.0.6"
+        "revision" : "5500fa8811ed339605b0861ae0390677863a7bfe",
+        "version" : "0.0.2"
       }
     },
     {
-      "identity" : "swiftlintplugin",
+      "identity" : "sttextview",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/lukepistrol/SwiftLintPlugin",
+      "location" : "https://github.com/krzyzanowskim/STTextView",
       "state" : {
-        "revision" : "ea6d3ca895b49910f790e98e4b4ca658e0fe490e",
-        "version" : "0.54.0"
+        "revision" : "e9e54718b882115db69ec1e17ac1bec844906cd9",
+        "version" : "0.9.0"
+      }
+    },
+    {
+      "identity" : "sttextview-plugin-annotations",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/krzyzanowskim/STTextView-Plugin-Annotations",
+      "state" : {
+        "revision" : "e9cfc2ce267622b4d73760a4663916d56f203995",
+        "version" : "1.0.2"
+      }
+    },
+    {
+      "identity" : "sttextview-plugin-neon",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/krzyzanowskim/STTextView-Plugin-Neon",
+      "state" : {
+        "revision" : "51ee66d2c3e4c259b25af2f6e7c2671209f8d3a6",
+        "version" : "0.1.0"
+      }
+    },
+    {
+      "identity" : "sttextview-plugin-textformation?tab=readme-ov-file",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ChimeHQ/STTextView-Plugin-TextFormation?tab=readme-ov-file",
+      "state" : {
+        "branch" : "main",
+        "revision" : "c92768db2c0201b38b13dc6a23cac760a3156d46"
       }
     },
     {
@@ -79,6 +106,15 @@
       "state" : {
         "revision" : "8883fa739aa213e70e6cb109bfbf0a0b551e4cb5",
         "version" : "0.8.0"
+      }
+    },
+    {
+      "identity" : "tree-sitter-xcframework",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/krzyzanowskim/tree-sitter-xcframework",
+      "state" : {
+        "revision" : "474d2ce3ce210be3ab30ff8f00ea564b4cd42a15",
+        "version" : "0.208.4"
       }
     }
   ],

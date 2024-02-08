@@ -3,16 +3,24 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		7B7197D32B6D33880080BBE5 /* MessagePacker in Frameworks */ = {isa = PBXBuildFile; productRef = 7B7197D22B6D33880080BBE5 /* MessagePacker */; };
 		7B7197D52B6D39480080BBE5 /* GraphCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7197D42B6D39480080BBE5 /* GraphCollection.swift */; };
-		7B7197F62B7392620080BBE5 /* CodeEditSourceEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 7B7197F52B7392620080BBE5 /* CodeEditSourceEditor */; };
 		7B7197F82B7393000080BBE5 /* EditorThemes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7197F72B7393000080BBE5 /* EditorThemes.swift */; };
 		7B7197FA2B739A3B0080BBE5 /* NSColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7197F92B739A3B0080BBE5 /* NSColor+Extension.swift */; };
 		7B7197FC2B740D710080BBE5 /* CompilationErrorDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7197FB2B740D710080BBE5 /* CompilationErrorDescription.swift */; };
+		7B7197FF2B7508480080BBE5 /* STCompletion in Frameworks */ = {isa = PBXBuildFile; productRef = 7B7197FE2B7508480080BBE5 /* STCompletion */; };
+		7B7198012B7508480080BBE5 /* STTextView in Frameworks */ = {isa = PBXBuildFile; productRef = 7B7198002B7508480080BBE5 /* STTextView */; };
+		7B7198042B75088C0080BBE5 /* STTextViewAnnotationsPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 7B7198032B75088C0080BBE5 /* STTextViewAnnotationsPlugin */; };
+		7B7198072B7508B40080BBE5 /* NeonPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 7B7198062B7508B40080BBE5 /* NeonPlugin */; };
+		7B7198092B7518CF0080BBE5 /* DefaultEquation.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7B7198082B7518CF0080BBE5 /* DefaultEquation.txt */; };
+		7B71980C2B7526BC0080BBE5 /* TextFormationPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 7B71980B2B7526BC0080BBE5 /* TextFormationPlugin */; };
+		7B71980E2B757F060080BBE5 /* InlineAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71980D2B757F060080BBE5 /* InlineAnnotationView.swift */; };
+		7B7198102B757F470080BBE5 /* InlineAnnotationKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71980F2B757F470080BBE5 /* InlineAnnotationKind.swift */; };
+		7B7198122B757F740080BBE5 /* InlineAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7198112B757F740080BBE5 /* InlineAnnotation.swift */; };
 		7BA788902B51472700C52003 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA7888F2B51472700C52003 /* AppDelegate.swift */; };
 		7BA788922B51472700C52003 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA788912B51472700C52003 /* ViewController.swift */; };
 		7BA788942B51472A00C52003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BA788932B51472A00C52003 /* Assets.xcassets */; };
@@ -41,6 +49,10 @@
 		7B7197F72B7393000080BBE5 /* EditorThemes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorThemes.swift; sourceTree = "<group>"; };
 		7B7197F92B739A3B0080BBE5 /* NSColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+Extension.swift"; sourceTree = "<group>"; };
 		7B7197FB2B740D710080BBE5 /* CompilationErrorDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilationErrorDescription.swift; sourceTree = "<group>"; };
+		7B7198082B7518CF0080BBE5 /* DefaultEquation.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = DefaultEquation.txt; sourceTree = "<group>"; usesTabs = 0; };
+		7B71980D2B757F060080BBE5 /* InlineAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineAnnotationView.swift; sourceTree = "<group>"; };
+		7B71980F2B757F470080BBE5 /* InlineAnnotationKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineAnnotationKind.swift; sourceTree = "<group>"; };
+		7B7198112B757F740080BBE5 /* InlineAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineAnnotation.swift; sourceTree = "<group>"; };
 		7BA7888C2B51472700C52003 /* SwiftGrapher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftGrapher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BA7888F2B51472700C52003 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BA788912B51472700C52003 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -55,7 +67,7 @@
 		7BF833822B654094006712E9 /* SidebarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		7BF833852B654127006712E9 /* Equation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equation.swift; sourceTree = "<group>"; };
 		7BF833872B666864006712E9 /* EquationManagementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquationManagementService.swift; sourceTree = "<group>"; };
-		7BF833892B666B49006712E9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		7BF833892B666B49006712E9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; usesTabs = 0; };
 		7BF8338C2B666BBF006712E9 /* CGColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGColor+Extension.swift"; sourceTree = "<group>"; };
 		7BF8338E2B66831D006712E9 /* EquationCalculationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquationCalculationModel.swift; sourceTree = "<group>"; };
 		7BF833902B66BEFD006712E9 /* EquationCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquationCellView.swift; sourceTree = "<group>"; };
@@ -72,8 +84,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B71980C2B7526BC0080BBE5 /* TextFormationPlugin in Frameworks */,
 				7B7197D32B6D33880080BBE5 /* MessagePacker in Frameworks */,
-				7B7197F62B7392620080BBE5 /* CodeEditSourceEditor in Frameworks */,
+				7B7198012B7508480080BBE5 /* STTextView in Frameworks */,
+				7B7197FF2B7508480080BBE5 /* STCompletion in Frameworks */,
+				7B7198072B7508B40080BBE5 /* NeonPlugin in Frameworks */,
+				7B7198042B75088C0080BBE5 /* STTextViewAnnotationsPlugin in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +129,7 @@
 				7BF833842B65411D006712E9 /* Models */,
 				7BA7889E2B51495600C52003 /* Services */,
 				7BA788932B51472A00C52003 /* Assets.xcassets */,
+				7B7198082B7518CF0080BBE5 /* DefaultEquation.txt */,
 				7BA788952B51472A00C52003 /* Main.storyboard */,
 				7BA788982B51472A00C52003 /* SwiftGrapher.entitlements */,
 			);
@@ -135,6 +152,7 @@
 				7B7197D42B6D39480080BBE5 /* GraphCollection.swift */,
 				7BF8339B2B694DCB006712E9 /* GraphCollectionDocument.swift */,
 				7B7197FB2B740D710080BBE5 /* CompilationErrorDescription.swift */,
+				7B7198112B757F740080BBE5 /* InlineAnnotation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -153,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				7BF833922B66FF38006712E9 /* StaticallyDecodable.swift */,
+				7B71980F2B757F470080BBE5 /* InlineAnnotationKind.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -190,6 +209,7 @@
 			children = (
 				7BA788A52B516BB700C52003 /* GraphView.swift */,
 				7BF833802B652CD9006712E9 /* TransformManager.swift */,
+				7B71980D2B757F060080BBE5 /* InlineAnnotationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -220,7 +240,11 @@
 			name = SwiftGrapher;
 			packageProductDependencies = (
 				7B7197D22B6D33880080BBE5 /* MessagePacker */,
-				7B7197F52B7392620080BBE5 /* CodeEditSourceEditor */,
+				7B7197FE2B7508480080BBE5 /* STCompletion */,
+				7B7198002B7508480080BBE5 /* STTextView */,
+				7B7198032B75088C0080BBE5 /* STTextViewAnnotationsPlugin */,
+				7B7198062B7508B40080BBE5 /* NeonPlugin */,
+				7B71980B2B7526BC0080BBE5 /* TextFormationPlugin */,
 			);
 			productName = SwiftGrapher;
 			productReference = 7BA7888C2B51472700C52003 /* SwiftGrapher.app */;
@@ -252,7 +276,10 @@
 			mainGroup = 7BA788832B51472700C52003;
 			packageReferences = (
 				7B7197D12B6D33880080BBE5 /* XCRemoteSwiftPackageReference "MessagePacker" */,
-				7B7197F42B7392620080BBE5 /* XCLocalSwiftPackageReference "CodeEditSourceEditor" */,
+				7B7197FD2B7508480080BBE5 /* XCRemoteSwiftPackageReference "STTextView" */,
+				7B7198022B75088C0080BBE5 /* XCRemoteSwiftPackageReference "STTextView-Plugin-Annotations" */,
+				7B7198052B7508B40080BBE5 /* XCRemoteSwiftPackageReference "STTextView-Plugin-Neon" */,
+				7B71980A2B7526BB0080BBE5 /* XCRemoteSwiftPackageReference "STTextView-Plugin-TextFormation" */,
 			);
 			productRefGroup = 7BA7888D2B51472700C52003 /* Products */;
 			projectDirPath = "";
@@ -270,6 +297,7 @@
 			files = (
 				7BA788942B51472A00C52003 /* Assets.xcassets in Resources */,
 				7BA788972B51472A00C52003 /* Main.storyboard in Resources */,
+				7B7198092B7518CF0080BBE5 /* DefaultEquation.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,16 +318,19 @@
 				7BF833862B654127006712E9 /* Equation.swift in Sources */,
 				7BA788922B51472700C52003 /* ViewController.swift in Sources */,
 				7BF8339C2B694DCB006712E9 /* GraphCollectionDocument.swift in Sources */,
+				7B71980E2B757F060080BBE5 /* InlineAnnotationView.swift in Sources */,
 				7BA788A22B5152EF00C52003 /* DynamicLibraryHandler.swift in Sources */,
 				7BA788902B51472700C52003 /* AppDelegate.swift in Sources */,
 				7B7197D52B6D39480080BBE5 /* GraphCollection.swift in Sources */,
 				7BF833882B666864006712E9 /* EquationManagementService.swift in Sources */,
+				7B7198122B757F740080BBE5 /* InlineAnnotation.swift in Sources */,
 				7BF833812B652CD9006712E9 /* TransformManager.swift in Sources */,
 				7BA788A62B516BB700C52003 /* GraphView.swift in Sources */,
 				7BF833A32B6966FA006712E9 /* WindowController.swift in Sources */,
 				7BF833832B654094006712E9 /* SidebarViewController.swift in Sources */,
 				7BF8338D2B666BBF006712E9 /* CGColor+Extension.swift in Sources */,
 				7BF8338F2B66831D006712E9 /* EquationCalculationModel.swift in Sources */,
+				7B7198102B757F470080BBE5 /* InlineAnnotationKind.swift in Sources */,
 				7B7197FC2B740D710080BBE5 /* CompilationErrorDescription.swift in Sources */,
 				7BF833A52B696837006712E9 /* SplitViewController.swift in Sources */,
 				7BF833932B66FF38006712E9 /* StaticallyDecodable.swift in Sources */,
@@ -519,13 +550,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		7B7197F42B7392620080BBE5 /* XCLocalSwiftPackageReference "CodeEditSourceEditor" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = CodeEditSourceEditor;
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
 		7B7197D12B6D33880080BBE5 /* XCRemoteSwiftPackageReference "MessagePacker" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -533,6 +557,38 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.4.7;
+			};
+		};
+		7B7197FD2B7508480080BBE5 /* XCRemoteSwiftPackageReference "STTextView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzyzanowskim/STTextView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.0;
+			};
+		};
+		7B7198022B75088C0080BBE5 /* XCRemoteSwiftPackageReference "STTextView-Plugin-Annotations" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzyzanowskim/STTextView-Plugin-Annotations";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.2;
+			};
+		};
+		7B7198052B7508B40080BBE5 /* XCRemoteSwiftPackageReference "STTextView-Plugin-Neon" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzyzanowskim/STTextView-Plugin-Neon";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
+		7B71980A2B7526BB0080BBE5 /* XCRemoteSwiftPackageReference "STTextView-Plugin-TextFormation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ChimeHQ/STTextView-Plugin-TextFormation?tab=readme-ov-file";
+			requirement = {
+				branch = main;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -543,9 +599,30 @@
 			package = 7B7197D12B6D33880080BBE5 /* XCRemoteSwiftPackageReference "MessagePacker" */;
 			productName = MessagePacker;
 		};
-		7B7197F52B7392620080BBE5 /* CodeEditSourceEditor */ = {
+		7B7197FE2B7508480080BBE5 /* STCompletion */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = CodeEditSourceEditor;
+			package = 7B7197FD2B7508480080BBE5 /* XCRemoteSwiftPackageReference "STTextView" */;
+			productName = STCompletion;
+		};
+		7B7198002B7508480080BBE5 /* STTextView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B7197FD2B7508480080BBE5 /* XCRemoteSwiftPackageReference "STTextView" */;
+			productName = STTextView;
+		};
+		7B7198032B75088C0080BBE5 /* STTextViewAnnotationsPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B7198022B75088C0080BBE5 /* XCRemoteSwiftPackageReference "STTextView-Plugin-Annotations" */;
+			productName = STTextViewAnnotationsPlugin;
+		};
+		7B7198062B7508B40080BBE5 /* NeonPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B7198052B7508B40080BBE5 /* XCRemoteSwiftPackageReference "STTextView-Plugin-Neon" */;
+			productName = NeonPlugin;
+		};
+		7B71980B2B7526BC0080BBE5 /* TextFormationPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B71980A2B7526BB0080BBE5 /* XCRemoteSwiftPackageReference "STTextView-Plugin-TextFormation" */;
+			productName = TextFormationPlugin;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
