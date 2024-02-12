@@ -65,21 +65,21 @@ class ViewController: NSViewController {
         
         textView.addPlugin(annotationManager)
         
-        let filters = [
-            StandardOpenPairFilter(open: "{", close: "}"),
-            NewlineWithinPairFilter(open: "{", close: "}"),
-            NewlineProcessingFilter(),
-        ] as [Filter]
-        
-        let indenter = TextualIndenter()
-
-        let providers = WhitespaceProviders(
-            leadingWhitespace: indenter.substitionProvider(indentationUnit: "    ", width: 4),
-            trailingWhitespace: { _, _ in return "" }
-        )
+//        let filters = [
+//            StandardOpenPairFilter(open: "{", close: "}"),
+//            NewlineWithinPairFilter(open: "{", close: "}"),
+//            NewlineProcessingFilter(),
+//        ] as [Filter]
+//        
+//        let indenter = TextualIndenter()
+//
+//        let providers = WhitespaceProviders(
+//            leadingWhitespace: indenter.substitionProvider(indentationUnit: "    ", width: 4),
+//            trailingWhitespace: { _, _ in return "" }
+//        )
 
         textView.addPlugin(
-            TextFormationPlugin(filters: filters, whitespaceProviders: providers)
+            TextIndentPlugin(indentType: .tabs)
         )
         
         textView.backgroundColor = .textBackgroundColor
