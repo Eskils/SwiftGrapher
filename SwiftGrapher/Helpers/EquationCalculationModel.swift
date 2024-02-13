@@ -8,6 +8,61 @@
 import Foundation
 import CoreGraphics
 
+final class DynamicLibraryService {
+    
+    var connection: NSXPCConnection
+    var proxy: DynamicLibraryServiceProtocol?
+    
+    init(libraryURL: URL) {
+        let interface = NSXPCInterface(with: DynamicLibraryServiceProtocol.self)
+        let connection = NSXPCConnection(serviceName: "com.skillbreak.DynamicLibraryService")
+        connection.remoteObjectInterface = interface
+        
+        self.connection = connection
+        
+        guard let proxy = connection.remoteObjectProxy as? DynamicLibraryServiceProtocol else {
+            assertionFailure()
+            return
+        }
+        self.proxy = proxy
+        
+        connection.interruptionHandler = {
+            print("Did interrupt")
+        }
+        
+        connection.resume()
+        
+        print("XPC PID: ", connection.processIdentifier)
+        
+        proxy.openLibrary(withURL: libraryURL)
+    }
+    
+    deinit {
+        connection.invalidate()
+    }
+    
+    func symbol(named name: String) async -> UnsafeMutableRawPointer? {
+        await withCheckedContinuation { continuation in
+            proxy?.symbol(named: name, reply: { result in
+                continuation.resume(returning: UnsafeMutableRawPointer(bitPattern: result))
+            })
+        }
+    }
+    
+    func calculation(x: Double) async -> Double {
+        await withCheckedContinuation { continuation in
+            proxy?.calculation(x: x, reply: { result in
+                continuation.resume(returning: result)
+            })
+        }
+    }
+    
+    func close() {
+        connection.invalidate()
+    }
+    
+}
+
 final class EquationCalculationModel {
     
     private let compilerService: SwiftCompilerService
@@ -18,9 +73,9 @@ final class EquationCalculationModel {
         self.equation = equation
     }
     
-    private var dylibHandler: DynamicLibraryHandler?
+    private var dylibHandler: DynamicLibraryService?
     
-    var calculationHandler: (@convention(c)(Double) -> Double)?
+    var calculationHandler: ((Double) async -> Double)?
     
     var color: CGColor {
         equation.color
@@ -53,29 +108,30 @@ final class EquationCalculationModel {
         currentVersionIsCompiled = false
     }
     
-    func compile() throws {
+    func compile() async throws {
         let text = equation.contents
         let libraryURL = try compilerService.compile(text: text)
-        execute(libraryURL: libraryURL)
+        await execute(libraryURL: libraryURL)
     }
     
-    private func execute(libraryURL: URL) {
+    private func execute(libraryURL: URL) async {
         self.calculationHandler = nil
         self.dylibHandler?.close()
         self.dylibHandler = nil
         
-        let dylibHandler = DynamicLibraryHandler(libraryURL: libraryURL)
-        guard let symbol = dylibHandler.symbol(named: "$s4main11calculation1xS2d_tF") else {
-            Logger.log("Could not find required symbol.")
-            return
-        }
+        let dylibHandler = DynamicLibraryService(libraryURL: libraryURL)
         
-        typealias CalculationSignature = @convention(c)(Double) -> Double
-        let handler = unsafeBitCast(symbol, to: CalculationSignature.self)
+//        guard let symbol = await dylibHandler.symbol(named: "$s4main11calculation1xS2d_tF") else {
+//            Logger.log("Could not find required symbol.")
+//            return
+//        }
+//        
+//        typealias CalculationSignature = @convention(c)(Double) -> Double
+//        let handler = unsafeBitCast(symbol, to: CalculationSignature.self)
         
         Logger.log("Found calculation symbol")
         
         self.dylibHandler = dylibHandler
-        self.calculationHandler = handler
+        self.calculationHandler = dylibHandler.calculation(x:)
     }
 }

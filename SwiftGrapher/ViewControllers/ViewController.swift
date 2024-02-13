@@ -112,7 +112,7 @@ class ViewController: NSViewController {
         ])
 
         compileButton.target = self
-        compileButton.action = #selector(compile)
+        compileButton.action = #selector(didPressCompile)
         
         graphViewContainer.dataSource = self
         graphViewContainer.clipsToBounds = true
@@ -155,8 +155,14 @@ class ViewController: NSViewController {
         calculationModel.updateContents(contents: textView.string)
     }
     
+    @objc private func didPressCompile() {
+        Task {
+            await compile()
+        }
+    }
+    
     @objc
-    private func compile() {
+    private func compile() async {
         do {
             let needsRecompilation = equationCalculationModels
                 .filter { $0.needsRecompilation }
@@ -165,7 +171,7 @@ class ViewController: NSViewController {
             
             for equation in needsRecompilation {
                 do {
-                    try equation.compile()
+                    try await equation.compile()
                 } catch {
                     if let error = error as? SwiftCompilerServiceImpl.ServiceError,
                        case .compilationError(let compileErrors) = error {
@@ -179,7 +185,7 @@ class ViewController: NSViewController {
             
             updateCompilationErrors(errors: errors)
             
-            graphViewContainer.display()
+            graphViewContainer.redraw()
         } catch {
             print("Could not compile: \(error)")
         }
@@ -220,8 +226,8 @@ extension ViewController: GraphViewDataSource {
         return model.isEnabled
     }
     
-    func graph(_ graphView: GraphView, valueForGraph graphIndex: Int, x: Double) -> Double {
-        guard 
+    func graph(_ graphView: GraphView, valueForGraph graphIndex: Int, x: Double) async -> Double {
+        guard
             equationCalculationModels.indices.contains(graphIndex),
             let model = Optional(equationCalculationModels[graphIndex]),
             let calculationHandler = model.calculationHandler
@@ -229,7 +235,7 @@ extension ViewController: GraphViewDataSource {
             return 0
         }
         
-        return calculationHandler(x)
+        return await calculationHandler(x)
     }
     
     func graph(_ graphView: GraphView, colorForGraph graphIndex: Int) -> CGColor {

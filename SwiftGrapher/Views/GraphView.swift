@@ -11,7 +11,15 @@ final class GraphView: TransformManager {
     
     weak var dataSource: GraphViewDataSource?
     
-    private func drawAxes() {
+    var context: CGContext?
+    
+    override func viewDidMoveToSuperview() {
+        super.viewDidMoveToSuperview()
+        
+        redraw()
+    }
+    
+    private func drawAxes(context: CGContext) {
         let width = self.frame.width
         let height = self.frame.height
         
@@ -25,12 +33,14 @@ final class GraphView: TransformManager {
         horizontalBarPath.move(to: CGPoint(x: 0, y: horizontalBaseY))
         horizontalBarPath.addLine(to: CGPoint(x: width, y: horizontalBaseY))
         
-        NSColor.lightGray.setStroke()
-        NSBezierPath(cgPath: verticalBarPath).stroke()
-        NSBezierPath(cgPath: horizontalBarPath).stroke()
+        context.setStrokeColor(NSColor.lightGray.cgColor)
+        context.addPath(verticalBarPath)
+        context.strokePath()
+        context.addPath(horizontalBarPath)
+        context.strokePath()
     }
     
-    private func drawFunctions() {
+    private func drawFunctions(context: CGContext) async {
         guard let dataSource else {
             return
         }
@@ -41,11 +51,11 @@ final class GraphView: TransformManager {
                 continue
             }
             
-            drawFunction(withIndex: index)
+            await drawFunction(withIndex: index, context: context)
         }
     }
     
-    private func drawFunction(withIndex index: Int) {
+    private func drawFunction(withIndex index: Int, context: CGContext) async {
         guard let dataSource else {
             return
         }
@@ -79,7 +89,8 @@ final class GraphView: TransformManager {
                 drawX += drawDelta
             }
             
-            let y = scale * dataSource.graph(self, valueForGraph: index, x: x) + transformAnchorPoint.y * height + translation.y
+            let value = await dataSource.graph(self, valueForGraph: index, x: x)
+            let y = scale * value + transformAnchorPoint.y * height + translation.y
             let point = CGPoint(x: drawX, y: y)
             
             // FIXME: Use vertical asymptotic analysis to determine
@@ -113,23 +124,43 @@ final class GraphView: TransformManager {
         }
         
         let color = dataSource.graph(self, colorForGraph: index)
-        NSColor(cgColor: color)?.setStroke()
-        let functionNS = NSBezierPath(cgPath: functionPath)
-        functionNS.lineWidth = 2
-        functionNS.stroke()
+        context.setStrokeColor(color)
+        context.setLineWidth(2)
+        context.addPath(functionPath)
+        context.strokePath()
     }
     
     override func didUpdateTranslationOrScale() {
         super.didUpdateTranslationOrScale()
         
-        self.display()
+       redraw()
+    }
+    
+    private var isRedrawing: Bool = false
+    
+    public func redraw() {
+        guard !isRedrawing, let context = CGContext(data: nil, width: Int(self.frame.width), height: Int(self.frame.height), bitsPerComponent: 8, bytesPerRow: 0, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue) else {
+            return
+        }
+        
+        Task {
+            isRedrawing = true
+            self.drawAxes(context: context)
+            await self.drawFunctions(context: context)
+            DispatchQueue.main.async {
+                self.isRedrawing = false
+                self.context = context
+                self.display()
+            }
+        }
     }
     
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
         
-        drawAxes() 
-        drawFunctions()
+        context?.makeImage().map {
+            NSGraphicsContext.current?.cgContext.draw($0, in: self.bounds)
+        }
     }
     
 }
@@ -137,7 +168,7 @@ final class GraphView: TransformManager {
 protocol GraphViewDataSource: AnyObject {
     
     func numberOfGraphs(in graphView: GraphView) -> Int
-    func graph(_ graphView: GraphView, valueForGraph graphIndex: Int, x: Double) -> Double
+    func graph(_ graphView: GraphView, valueForGraph graphIndex: Int, x: Double) async -> Double
     func graph(_ graphView: GraphView, colorForGraph graphIndex: Int) -> CGColor
     func graph(_ graphView: GraphView, showGraph graphIndex: Int) -> Bool
     

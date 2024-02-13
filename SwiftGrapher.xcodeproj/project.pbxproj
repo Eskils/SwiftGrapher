@@ -21,12 +21,20 @@
 		7B71980E2B757F060080BBE5 /* InlineAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71980D2B757F060080BBE5 /* InlineAnnotationView.swift */; };
 		7B7198102B757F470080BBE5 /* InlineAnnotationKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71980F2B757F470080BBE5 /* InlineAnnotationKind.swift */; };
 		7B7198122B757F740080BBE5 /* InlineAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7198112B757F740080BBE5 /* InlineAnnotation.swift */; };
+		7B7198142B78E2D40080BBE5 /* STTextView+TextIndentPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7198132B78E2D40080BBE5 /* STTextView+TextIndentPlugin.swift */; };
+		7B7198182B7A53040080BBE5 /* DynamicLibraryHandlerCpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B7198162B7A53040080BBE5 /* DynamicLibraryHandlerCpp.cpp */; };
+		7B7198202B7A60BD0080BBE5 /* DynamicLibraryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71981F2B7A60BD0080BBE5 /* DynamicLibraryService.swift */; };
+		7B7198222B7A60BD0080BBE5 /* DynamicLibraryServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7198212B7A60BD0080BBE5 /* DynamicLibraryServiceProtocol.swift */; };
+		7B7198242B7A60BD0080BBE5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7198232B7A60BD0080BBE5 /* main.swift */; };
+		7B7198292B7A60BD0080BBE5 /* DynamicLibraryService.xpc in Embed XPC Services */ = {isa = PBXBuildFile; fileRef = 7B71981D2B7A60BD0080BBE5 /* DynamicLibraryService.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		7B71982F2B7A61100080BBE5 /* DynamicLibraryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71982E2B7A61100080BBE5 /* DynamicLibraryHandler.swift */; };
+		7B7198302B7A611F0080BBE5 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA788A32B5158A600C52003 /* Logger.swift */; };
+		7B7198312B7A621F0080BBE5 /* DynamicLibraryServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7198212B7A60BD0080BBE5 /* DynamicLibraryServiceProtocol.swift */; };
 		7BA788902B51472700C52003 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA7888F2B51472700C52003 /* AppDelegate.swift */; };
 		7BA788922B51472700C52003 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA788912B51472700C52003 /* ViewController.swift */; };
 		7BA788942B51472A00C52003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BA788932B51472A00C52003 /* Assets.xcassets */; };
 		7BA788972B51472A00C52003 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BA788952B51472A00C52003 /* Main.storyboard */; };
 		7BA788A02B51496800C52003 /* SwiftCompilerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA7889F2B51496800C52003 /* SwiftCompilerService.swift */; };
-		7BA788A22B5152EF00C52003 /* DynamicLibraryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA788A12B5152EF00C52003 /* DynamicLibraryHandler.swift */; };
 		7BA788A42B5158A600C52003 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA788A32B5158A600C52003 /* Logger.swift */; };
 		7BA788A62B516BB700C52003 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA788A52B516BB700C52003 /* GraphView.swift */; };
 		7BF833812B652CD9006712E9 /* TransformManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF833802B652CD9006712E9 /* TransformManager.swift */; };
@@ -44,15 +52,50 @@
 		7BF833A52B696837006712E9 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF833A42B696837006712E9 /* SplitViewController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		7B7198272B7A60BD0080BBE5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BA788842B51472700C52003 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7B71981C2B7A60BD0080BBE5;
+			remoteInfo = DynamicLibraryService;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7B71982D2B7A60BD0080BBE5 /* Embed XPC Services */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/XPCServices";
+			dstSubfolderSpec = 16;
+			files = (
+				7B7198292B7A60BD0080BBE5 /* DynamicLibraryService.xpc in Embed XPC Services */,
+			);
+			name = "Embed XPC Services";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		7B7197D42B6D39480080BBE5 /* GraphCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphCollection.swift; sourceTree = "<group>"; };
 		7B7197F72B7393000080BBE5 /* EditorThemes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorThemes.swift; sourceTree = "<group>"; };
 		7B7197F92B739A3B0080BBE5 /* NSColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+Extension.swift"; sourceTree = "<group>"; };
 		7B7197FB2B740D710080BBE5 /* CompilationErrorDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilationErrorDescription.swift; sourceTree = "<group>"; };
-		7B7198082B7518CF0080BBE5 /* DefaultEquation.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = DefaultEquation.txt; sourceTree = "<group>"; usesTabs = 0; };
+		7B7198082B7518CF0080BBE5 /* DefaultEquation.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = DefaultEquation.txt; sourceTree = "<group>"; usesTabs = 1; };
 		7B71980D2B757F060080BBE5 /* InlineAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineAnnotationView.swift; sourceTree = "<group>"; };
 		7B71980F2B757F470080BBE5 /* InlineAnnotationKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineAnnotationKind.swift; sourceTree = "<group>"; };
 		7B7198112B757F740080BBE5 /* InlineAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineAnnotation.swift; sourceTree = "<group>"; };
+		7B7198132B78E2D40080BBE5 /* STTextView+TextIndentPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "STTextView+TextIndentPlugin.swift"; sourceTree = "<group>"; };
+		7B7198152B7A53030080BBE5 /* SwiftGrapher-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftGrapher-Bridging-Header.h"; sourceTree = "<group>"; };
+		7B7198162B7A53040080BBE5 /* DynamicLibraryHandlerCpp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DynamicLibraryHandlerCpp.cpp; sourceTree = "<group>"; };
+		7B7198172B7A53040080BBE5 /* DynamicLibraryHandlerCpp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DynamicLibraryHandlerCpp.hpp; sourceTree = "<group>"; };
+		7B71981D2B7A60BD0080BBE5 /* DynamicLibraryService.xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = DynamicLibraryService.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B71981F2B7A60BD0080BBE5 /* DynamicLibraryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicLibraryService.swift; sourceTree = "<group>"; };
+		7B7198212B7A60BD0080BBE5 /* DynamicLibraryServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicLibraryServiceProtocol.swift; sourceTree = "<group>"; };
+		7B7198232B7A60BD0080BBE5 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		7B7198252B7A60BD0080BBE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B7198262B7A60BD0080BBE5 /* DynamicLibraryService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DynamicLibraryService.entitlements; sourceTree = "<group>"; };
+		7B71982E2B7A61100080BBE5 /* DynamicLibraryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicLibraryHandler.swift; sourceTree = "<group>"; };
 		7BA7888C2B51472700C52003 /* SwiftGrapher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftGrapher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BA7888F2B51472700C52003 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BA788912B51472700C52003 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +123,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7B71981A2B7A60BD0080BBE5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7BA788892B51472700C52003 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -96,10 +146,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B71981E2B7A60BD0080BBE5 /* DynamicLibraryService */ = {
+			isa = PBXGroup;
+			children = (
+				7B71981F2B7A60BD0080BBE5 /* DynamicLibraryService.swift */,
+				7B7198212B7A60BD0080BBE5 /* DynamicLibraryServiceProtocol.swift */,
+				7B7198232B7A60BD0080BBE5 /* main.swift */,
+				7B71982E2B7A61100080BBE5 /* DynamicLibraryHandler.swift */,
+				7B7198252B7A60BD0080BBE5 /* Info.plist */,
+				7B7198262B7A60BD0080BBE5 /* DynamicLibraryService.entitlements */,
+			);
+			path = DynamicLibraryService;
+			sourceTree = "<group>";
+		};
 		7BA788832B51472700C52003 = {
 			isa = PBXGroup;
 			children = (
 				7BA7888E2B51472700C52003 /* SwiftGrapher */,
+				7B71981E2B7A60BD0080BBE5 /* DynamicLibraryService */,
 				7BA7888D2B51472700C52003 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -108,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				7BA7888C2B51472700C52003 /* SwiftGrapher.app */,
+				7B71981D2B7A60BD0080BBE5 /* DynamicLibraryService.xpc */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -200,6 +265,10 @@
 				7BF8338E2B66831D006712E9 /* EquationCalculationModel.swift */,
 				7BA788A32B5158A600C52003 /* Logger.swift */,
 				7BA788A12B5152EF00C52003 /* DynamicLibraryHandler.swift */,
+				7B7198162B7A53040080BBE5 /* DynamicLibraryHandlerCpp.cpp */,
+				7B7198172B7A53040080BBE5 /* DynamicLibraryHandlerCpp.hpp */,
+				7B7198132B78E2D40080BBE5 /* STTextView+TextIndentPlugin.swift */,
+				7B7198152B7A53030080BBE5 /* SwiftGrapher-Bridging-Header.h */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -225,6 +294,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		7B71981C2B7A60BD0080BBE5 /* DynamicLibraryService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7B71982A2B7A60BD0080BBE5 /* Build configuration list for PBXNativeTarget "DynamicLibraryService" */;
+			buildPhases = (
+				7B7198192B7A60BD0080BBE5 /* Sources */,
+				7B71981A2B7A60BD0080BBE5 /* Frameworks */,
+				7B71981B2B7A60BD0080BBE5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DynamicLibraryService;
+			productName = DynamicLibraryService;
+			productReference = 7B71981D2B7A60BD0080BBE5 /* DynamicLibraryService.xpc */;
+			productType = "com.apple.product-type.xpc-service";
+		};
 		7BA7888B2B51472700C52003 /* SwiftGrapher */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7BA7889B2B51472A00C52003 /* Build configuration list for PBXNativeTarget "SwiftGrapher" */;
@@ -232,10 +318,12 @@
 				7BA788882B51472700C52003 /* Sources */,
 				7BA788892B51472700C52003 /* Frameworks */,
 				7BA7888A2B51472700C52003 /* Resources */,
+				7B71982D2B7A60BD0080BBE5 /* Embed XPC Services */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				7B7198282B7A60BD0080BBE5 /* PBXTargetDependency */,
 			);
 			name = SwiftGrapher;
 			packageProductDependencies = (
@@ -260,8 +348,12 @@
 				LastSwiftUpdateCheck = 1510;
 				LastUpgradeCheck = 1510;
 				TargetAttributes = {
+					7B71981C2B7A60BD0080BBE5 = {
+						CreatedOnToolsVersion = 15.1;
+					};
 					7BA7888B2B51472700C52003 = {
 						CreatedOnToolsVersion = 15.1;
+						LastSwiftMigration = 1510;
 					};
 				};
 			};
@@ -286,11 +378,19 @@
 			projectRoot = "";
 			targets = (
 				7BA7888B2B51472700C52003 /* SwiftGrapher */,
+				7B71981C2B7A60BD0080BBE5 /* DynamicLibraryService */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7B71981B2B7A60BD0080BBE5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7BA7888A2B51472700C52003 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -304,6 +404,18 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7B7198192B7A60BD0080BBE5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B7198302B7A611F0080BBE5 /* Logger.swift in Sources */,
+				7B7198202B7A60BD0080BBE5 /* DynamicLibraryService.swift in Sources */,
+				7B7198222B7A60BD0080BBE5 /* DynamicLibraryServiceProtocol.swift in Sources */,
+				7B71982F2B7A61100080BBE5 /* DynamicLibraryHandler.swift in Sources */,
+				7B7198242B7A60BD0080BBE5 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7BA788882B51472700C52003 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -313,19 +425,21 @@
 				7BF8338A2B666B49006712E9 /* Constants.swift in Sources */,
 				7B7197F82B7393000080BBE5 /* EditorThemes.swift in Sources */,
 				7BF833912B66BEFD006712E9 /* EquationCellView.swift in Sources */,
+				7B7198142B78E2D40080BBE5 /* STTextView+TextIndentPlugin.swift in Sources */,
 				7BA788A02B51496800C52003 /* SwiftCompilerService.swift in Sources */,
 				7BF833962B66FF61006712E9 /* CGColorSpace+Extension.swift in Sources */,
+				7B7198182B7A53040080BBE5 /* DynamicLibraryHandlerCpp.cpp in Sources */,
 				7BF833862B654127006712E9 /* Equation.swift in Sources */,
 				7BA788922B51472700C52003 /* ViewController.swift in Sources */,
 				7BF8339C2B694DCB006712E9 /* GraphCollectionDocument.swift in Sources */,
 				7B71980E2B757F060080BBE5 /* InlineAnnotationView.swift in Sources */,
-				7BA788A22B5152EF00C52003 /* DynamicLibraryHandler.swift in Sources */,
 				7BA788902B51472700C52003 /* AppDelegate.swift in Sources */,
 				7B7197D52B6D39480080BBE5 /* GraphCollection.swift in Sources */,
 				7BF833882B666864006712E9 /* EquationManagementService.swift in Sources */,
 				7B7198122B757F740080BBE5 /* InlineAnnotation.swift in Sources */,
 				7BF833812B652CD9006712E9 /* TransformManager.swift in Sources */,
 				7BA788A62B516BB700C52003 /* GraphView.swift in Sources */,
+				7B7198312B7A621F0080BBE5 /* DynamicLibraryServiceProtocol.swift in Sources */,
 				7BF833A32B6966FA006712E9 /* WindowController.swift in Sources */,
 				7BF833832B654094006712E9 /* SidebarViewController.swift in Sources */,
 				7BF8338D2B666BBF006712E9 /* CGColor+Extension.swift in Sources */,
@@ -339,6 +453,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		7B7198282B7A60BD0080BBE5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7B71981C2B7A60BD0080BBE5 /* DynamicLibraryService */;
+			targetProxy = 7B7198272B7A60BD0080BBE5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		7BA788952B51472A00C52003 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -351,6 +473,50 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		7B71982B2B7A60BD0080BBE5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = DynamicLibraryService/DynamicLibraryService.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = EUKTZ7725R;
+				ENABLE_HARDENED_RUNTIME = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DynamicLibraryService/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DynamicLibraryService;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.skillbreak.DynamicLibraryService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		7B71982C2B7A60BD0080BBE5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = DynamicLibraryService/DynamicLibraryService.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = EUKTZ7725R;
+				ENABLE_HARDENED_RUNTIME = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DynamicLibraryService/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DynamicLibraryService;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.skillbreak.DynamicLibraryService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		7BA788992B51472A00C52003 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -472,8 +638,10 @@
 		7BA7889C2B51472A00C52003 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SwiftGrapher/SwiftGrapher.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -494,6 +662,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.skillbreak.SwiftGrapher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftGrapher/Helpers/SwiftGrapher-Bridging-Header.h";
+				SWIFT_OBJC_INTEROP_MODE = objc;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -501,8 +672,10 @@
 		7BA7889D2B51472A00C52003 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SwiftGrapher/SwiftGrapher.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -523,6 +696,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.skillbreak.SwiftGrapher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftGrapher/Helpers/SwiftGrapher-Bridging-Header.h";
+				SWIFT_OBJC_INTEROP_MODE = objc;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -530,6 +705,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7B71982A2B7A60BD0080BBE5 /* Build configuration list for PBXNativeTarget "DynamicLibraryService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B71982B2B7A60BD0080BBE5 /* Debug */,
+				7B71982C2B7A60BD0080BBE5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		7BA788872B51472700C52003 /* Build configuration list for PBXProject "SwiftGrapher" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
