@@ -19,6 +19,9 @@ protocol EquationManagementService: AnyObject {
     func addEquation()
     func setGraphCollection(_ graphCollection: GraphCollection)
     
+    func remove(equation: Equation)
+    func removeEquation(atIndex index: Int)
+    
 }
 
 final class EquationManagementServiceImpl: EquationManagementService {
@@ -46,7 +49,7 @@ final class EquationManagementServiceImpl: EquationManagementService {
     private var cancellables = Set<AnyCancellable>()
     
     init() {
-        let initialEquation = Equation.emptyWithRandomColor()
+        let initialEquation = Equation.empty(withColor: Constants.defaultEquationColors.first?.cgColor)
         
         self.graphCollection = GraphCollection(equations: [initialEquation])
         
@@ -54,7 +57,25 @@ final class EquationManagementServiceImpl: EquationManagementService {
     }
     
     func addEquation() {
-        graphCollection.addEquation()
+        let colorIndex = equations.count % Constants.defaultEquationColors.count
+        let color = Constants.defaultEquationColors[colorIndex].cgColor
+        graphCollection.addEquation(color: color)
+    }
+    
+    func remove(equation: Equation) {
+        guard let index = equations.firstIndex(of: equation) else {
+            return
+        }
+        
+        graphCollection.removeEquation(atIndex: index)
+    }
+    
+    func removeEquation(atIndex index: Int) {
+        guard equations.indices.contains(index) else {
+            return
+        }
+        
+        graphCollection.removeEquation(atIndex: index)
     }
     
     func setGraphCollection(_ graphCollection: GraphCollection) {

@@ -32,6 +32,8 @@ final class SidebarViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.menu = makeMenu()
+        
         equationManagementService.equationsPublisher
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: didUpdate(equations:))
@@ -44,6 +46,36 @@ final class SidebarViewController: NSViewController {
         }
         
         tableView.reloadData()
+    }
+    
+    private func makeMenu() -> NSMenu {
+        let menu = NSMenu()
+        
+        menu.addItem(NSMenuItem(title: "Rename", action: #selector(didPressRenameEquation(sender:)), keyEquivalent: ""))
+        menu.addItem(NSMenuItem(title: "Delete", action: #selector(didPressDeleteEquation(sender:)), keyEquivalent: String(Unicode.Scalar(NSBackspaceCharacter)!)))
+        
+        return menu
+    }
+    
+    @objc 
+    private func didPressRenameEquation(sender: Any) {
+        guard
+            tableView.clickedRow >= 0,
+            let cellView = tableView.view(atColumn: 0, row: tableView.clickedRow, makeIfNecessary: false) as? EquationCellView
+        else {
+            return
+        }
+
+        cellView.showRename()
+    }
+    
+    @objc
+    private func didPressDeleteEquation(sender: Any) {
+        guard tableView.clickedRow >= 0 else {
+            return
+        }
+        
+        equationManagementService.removeEquation(atIndex: tableView.clickedRow)
     }
 }
 

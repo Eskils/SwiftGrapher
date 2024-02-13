@@ -28,6 +28,20 @@ class Equation: Encodable, Decodable, Equatable {
         self.contents = contents
     }
     
+    static func empty(withColor color: CGColor?) -> Equation {
+        guard let color else {
+            return .emptyWithRandomColor()
+        }
+        
+        return Equation(
+            id: UUID().uuidString,
+            name: nil,
+            color: color,
+            isEnabled: true,
+            contents: Constants.defaultEquationImplementation
+        )
+    }
+    
     static func emptyWithRandomColor() -> Equation {
         let colorValues = SIMD4<Double>(SIMD4(x: UInt8.random(in: 20..<180), y: UInt8.random(in: 20..<180), z: UInt8.random(in: 20..<180), w: 255)) / 255
         let color = CGColor(red: colorValues.x, green: colorValues.y, blue: colorValues.z, alpha: colorValues.w)

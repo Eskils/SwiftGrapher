@@ -24,6 +24,7 @@ final class EquationCellView: NSView {
     
     private let nameLabel = {
         let label = NSTextField(wrappingLabelWithString: "")
+        label.isSelectable = false
         return label
     }()
     
@@ -39,6 +40,10 @@ final class EquationCellView: NSView {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    func showRename() {
+        didTapLabel()
     }
     
     private func configureView() {

@@ -134,8 +134,14 @@ class ViewController: NSViewController {
                 !equationCalculationModels.contains(where: { model in model.id == equation.id })
             }
         
+        self.equationCalculationModels.removeAll(where: { model in
+            !equations.contains(where: { equation in model.id == equation.id })
+        })
+        
         self.equationCalculationModels += addedEquations
             .map { EquationCalculationModel(compilerService: compilerService, equation: $0) }
+        
+        print(equationCalculationModels.map { $0.id })
     }
     
     private func didUpdate(selectedEquation: Equation) {

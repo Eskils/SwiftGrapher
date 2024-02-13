@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import CoreGraphics.CGColor
 
 final class GraphCollection: Encodable, Decodable {
     
@@ -22,12 +23,17 @@ final class GraphCollection: Encodable, Decodable {
         self.equations = equations
     }
     
-    func addEquation() {
-        equations.append(.emptyWithRandomColor())
+    func addEquation(color: CGColor? = nil) {
+        equations.append(.empty(withColor: color))
+    }
+    
+    func removeEquation(atIndex index: Int) {
+        equations.remove(at: index)
     }
     
     static func newWithSingleEquation() -> GraphCollection {
-        GraphCollection(equations: [.emptyWithRandomColor()])
+        let equation = Equation.empty(withColor: Constants.defaultEquationColors.first?.cgColor)
+        return GraphCollection(equations: [equation])
     }
        
     enum CodingKeys: String, CodingKey {

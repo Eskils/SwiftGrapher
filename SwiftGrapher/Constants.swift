@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AppKit
 
 struct Constants {
     
@@ -22,5 +23,16 @@ struct Constants {
         
         return text
     }()
+    
+    static let defaultEquationColors = [
+        NSColor.EquationColors.aOrange,
+        NSColor.EquationColors.bLemon,
+        NSColor.EquationColors.cLime,
+        NSColor.EquationColors.dMoss,
+        NSColor.EquationColors.eCyan,
+        NSColor.EquationColors.fBlue,
+        NSColor.EquationColors.gLavender,
+        NSColor.EquationColors.hStrawberry,
+    ]
     
 }
