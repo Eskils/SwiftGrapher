@@ -9,7 +9,7 @@ import AppKit
 
 class TransformManager: NSView {
     
-    let scrollView = NSScrollView()
+    let scrollView = DisableableScrollView()
     let contentView = NSView()
     var translationMagnitude: Int = 1000
     var transformAnchorPoint: CGPoint = CGPoint(x: 0.5, y: 0.5)

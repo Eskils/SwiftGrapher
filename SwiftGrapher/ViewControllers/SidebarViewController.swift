@@ -7,12 +7,15 @@
 
 import AppKit
 import Combine
+import SwiftUI
 
 final class SidebarViewController: NSViewController {
     
     let equationManagementService: EquationManagementService
     
     private var cancellables = Set<AnyCancellable>()
+    
+    var delegate: SidebarViewControllerDelegate?
     
     @IBAction func didPressAddEquation(_ sender: Any) {
         equationManagementService.addEquation()
@@ -52,7 +55,23 @@ final class SidebarViewController: NSViewController {
         let menu = NSMenu()
         
         menu.addItem(NSMenuItem(title: "Rename", action: #selector(didPressRenameEquation(sender:)), keyEquivalent: ""))
-        menu.addItem(NSMenuItem(title: "Delete", action: #selector(didPressDeleteEquation(sender:)), keyEquivalent: String(Unicode.Scalar(NSBackspaceCharacter)!)))
+        menu.addItem(NSMenuItem(title: "Delete", action: #selector(didPressDeleteEquation(sender:)), keyEquivalent: ""))
+        
+        menu.addItem(NSMenuItem.separator())
+        
+        let colorPickerView = HorizontalColorSelectView(didChangeColorHandler: didChangeColorOfEquation(color:))
+        let hostingView = NSHostingView(rootView: colorPickerView)
+        hostingView.frame = CGRect(x: 0, y: 0, width: 185, height: 30)
+        let colorPickerItem = NSMenuItem()
+        colorPickerItem.target = self
+        colorPickerItem.view = hostingView
+        menu.addItem(colorPickerItem)
+        
+        menu.addItem(NSMenuItem(title: "Choose custom color", action: #selector(didPressEditEquation(sender:)), keyEquivalent: ""))
+        
+        menu.addItem(NSMenuItem.separator())
+        
+        menu.addItem(NSMenuItem(title: "Edit details…", action: #selector(didPressEditEquation(sender:)), keyEquivalent: ""))
         
         return menu
     }
@@ -76,6 +95,36 @@ final class SidebarViewController: NSViewController {
         }
         
         equationManagementService.removeEquation(atIndex: tableView.clickedRow)
+    }
+    
+    private func didChangeColorOfEquation(color: CGColor) {
+        guard tableView.clickedRow >= 0, equationManagementService.equations.indices.contains(tableView.clickedRow) else {
+            return
+        }
+        
+        let equation = equationManagementService.equations[tableView.clickedRow]
+        equation.color = color
+        tableView.reloadData(forRowIndexes: IndexSet(integer: tableView.clickedRow), columnIndexes: IndexSet(integer: 0))
+        delegate?.sidebar(self, equationDidChange: equation)
+    }
+    
+    @objc
+    private func didPressEditEquation(sender: Any) {
+        guard
+            tableView.clickedRow >= 0,
+            equationManagementService.equations.indices.contains(tableView.clickedRow)
+        else {
+            return
+        }
+        
+        let clickedRow = tableView.clickedRow
+        let equation = equationManagementService.equations[clickedRow]
+        
+        let detailsSheet = EquationDetailsSheetViewController(equation: equation, defaultName: "Equation \(tableView.clickedRow + 1)", didChangeHandler: {_ in 
+            self.tableView.reloadData(forRowIndexes: IndexSet(integer: clickedRow), columnIndexes: IndexSet(integer: 0))
+            self.delegate?.sidebar(self, equationDidChange: equation)
+        })
+        self.presentAsSheet(detailsSheet)
     }
 }
 
@@ -107,4 +156,8 @@ extension SidebarViewController: NSTableViewDataSource, NSTableViewDelegate {
         equationManagementService.selectedEquation = equationManagementService.equations[tableView.selectedRow]
     }
     
+}
+
+protocol SidebarViewControllerDelegate {
+    func sidebar(_ sidebar: SidebarViewController, equationDidChange equation: Equation)
 }

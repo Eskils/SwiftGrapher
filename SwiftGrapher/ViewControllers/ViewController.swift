@@ -59,24 +59,13 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        textView.addPlugin(
-            NeonPlugin(theme: DefaultSourceEditorTheme(), language: .swift)
-        )
+        DispatchQueue.global().async {
+            self.textView.addPlugin(
+                NeonPlugin(theme: DefaultSourceEditorTheme(), language: .swift)
+            )
+        }
         
         textView.addPlugin(annotationManager)
-        
-//        let filters = [
-//            StandardOpenPairFilter(open: "{", close: "}"),
-//            NewlineWithinPairFilter(open: "{", close: "}"),
-//            NewlineProcessingFilter(),
-//        ] as [Filter]
-//        
-//        let indenter = TextualIndenter()
-//
-//        let providers = WhitespaceProviders(
-//            leadingWhitespace: indenter.substitionProvider(indentationUnit: "    ", width: 4),
-//            trailingWhitespace: { _, _ in return "" }
-//        )
 
         textView.addPlugin(
             TextIndentPlugin(indentType: .tabs)
@@ -140,8 +129,6 @@ class ViewController: NSViewController {
         
         self.equationCalculationModels += addedEquations
             .map { EquationCalculationModel(compilerService: compilerService, equation: $0) }
-        
-        print(equationCalculationModels.map { $0.id })
     }
     
     private func didUpdate(selectedEquation: Equation) {
@@ -276,5 +263,13 @@ extension ViewController: STAnnotationsDataSource {
         return annotations
     }
     
+    
+}
+
+extension ViewController: SidebarViewControllerDelegate {
+    
+    func sidebar(_ sidebar: SidebarViewController, equationDidChange equation: Equation) {
+        graphViewContainer.display()
+    }
     
 }
