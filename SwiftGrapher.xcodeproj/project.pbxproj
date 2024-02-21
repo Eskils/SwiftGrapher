@@ -23,6 +23,9 @@
 		7B7198122B757F740080BBE5 /* InlineAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7198112B757F740080BBE5 /* InlineAnnotation.swift */; };
 		7B7198332B7BF7640080BBE5 /* STTextView+TextIndentPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7198322B7BF7640080BBE5 /* STTextView+TextIndentPlugin.swift */; };
 		7B7198352B7C09D60080BBE5 /* FirstResponderFriendlyTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7198342B7C09D60080BBE5 /* FirstResponderFriendlyTableView.swift */; };
+		7B7198372B7C12A60080BBE5 /* HorizontalColorSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7198362B7C12A60080BBE5 /* HorizontalColorSelectView.swift */; };
+		7B8649532B7D06C000A2D962 /* EquationDetailsSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8649522B7D06C000A2D962 /* EquationDetailsSheetViewController.swift */; };
+		7B8649552B7E2AEE00A2D962 /* DisableableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8649542B7E2AEE00A2D962 /* DisableableScrollView.swift */; };
 		7BA788902B51472700C52003 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA7888F2B51472700C52003 /* AppDelegate.swift */; };
 		7BA788922B51472700C52003 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA788912B51472700C52003 /* ViewController.swift */; };
 		7BA788942B51472A00C52003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BA788932B51472A00C52003 /* Assets.xcassets */; };
@@ -57,6 +60,9 @@
 		7B7198112B757F740080BBE5 /* InlineAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineAnnotation.swift; sourceTree = "<group>"; };
 		7B7198322B7BF7640080BBE5 /* STTextView+TextIndentPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "STTextView+TextIndentPlugin.swift"; sourceTree = "<group>"; };
 		7B7198342B7C09D60080BBE5 /* FirstResponderFriendlyTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstResponderFriendlyTableView.swift; sourceTree = "<group>"; };
+		7B7198362B7C12A60080BBE5 /* HorizontalColorSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalColorSelectView.swift; sourceTree = "<group>"; };
+		7B8649522B7D06C000A2D962 /* EquationDetailsSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquationDetailsSheetViewController.swift; sourceTree = "<group>"; };
+		7B8649542B7E2AEE00A2D962 /* DisableableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisableableScrollView.swift; sourceTree = "<group>"; };
 		7BA7888C2B51472700C52003 /* SwiftGrapher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftGrapher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BA7888F2B51472700C52003 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BA788912B51472700C52003 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -194,6 +200,7 @@
 				7BF833822B654094006712E9 /* SidebarViewController.swift */,
 				7BA788912B51472700C52003 /* ViewController.swift */,
 				7BF833A42B696837006712E9 /* SplitViewController.swift */,
+				7B8649522B7D06C000A2D962 /* EquationDetailsSheetViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -213,6 +220,8 @@
 			isa = PBXGroup;
 			children = (
 				7BA788A52B516BB700C52003 /* GraphView.swift */,
+				7B8649542B7E2AEE00A2D962 /* DisableableScrollView.swift */,
+				7B7198362B7C12A60080BBE5 /* HorizontalColorSelectView.swift */,
 				7BF833802B652CD9006712E9 /* TransformManager.swift */,
 				7B71980D2B757F060080BBE5 /* InlineAnnotationView.swift */,
 				7B7198342B7C09D60080BBE5 /* FirstResponderFriendlyTableView.swift */,
@@ -318,6 +327,7 @@
 				7BA788A42B5158A600C52003 /* Logger.swift in Sources */,
 				7BF8338A2B666B49006712E9 /* Constants.swift in Sources */,
 				7B7197F82B7393000080BBE5 /* EditorThemes.swift in Sources */,
+				7B8649552B7E2AEE00A2D962 /* DisableableScrollView.swift in Sources */,
 				7BF833912B66BEFD006712E9 /* EquationCellView.swift in Sources */,
 				7B7198332B7BF7640080BBE5 /* STTextView+TextIndentPlugin.swift in Sources */,
 				7BA788A02B51496800C52003 /* SwiftCompilerService.swift in Sources */,
@@ -335,11 +345,13 @@
 				7BA788A62B516BB700C52003 /* GraphView.swift in Sources */,
 				7BF833A32B6966FA006712E9 /* WindowController.swift in Sources */,
 				7BF833832B654094006712E9 /* SidebarViewController.swift in Sources */,
+				7B8649532B7D06C000A2D962 /* EquationDetailsSheetViewController.swift in Sources */,
 				7BF8338D2B666BBF006712E9 /* CGColor+Extension.swift in Sources */,
 				7B7198352B7C09D60080BBE5 /* FirstResponderFriendlyTableView.swift in Sources */,
 				7BF8338F2B66831D006712E9 /* EquationCalculationModel.swift in Sources */,
 				7B7198102B757F470080BBE5 /* InlineAnnotationKind.swift in Sources */,
 				7B7197FC2B740D710080BBE5 /* CompilationErrorDescription.swift in Sources */,
+				7B7198372B7C12A60080BBE5 /* HorizontalColorSelectView.swift in Sources */,
 				7BF833A52B696837006712E9 /* SplitViewController.swift in Sources */,
 				7BF833932B66FF38006712E9 /* StaticallyDecodable.swift in Sources */,
 			);

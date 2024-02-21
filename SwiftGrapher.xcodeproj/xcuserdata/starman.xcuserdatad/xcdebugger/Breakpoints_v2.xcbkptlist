@@ -158,8 +158,8 @@
             filePath = "SwiftGrapher/Models/Equation.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
             landmarkName = "emptyWithRandomColor()"
             landmarkType = "7">
          </BreakpointContent>
@@ -398,8 +398,8 @@
             filePath = "SwiftGrapher/ViewControllers/SidebarViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "didUpdate(equations:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -414,8 +414,8 @@
             filePath = "SwiftGrapher/Services/EquationManagementService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
             landmarkName = "addEquation()"
             landmarkType = "7">
          </BreakpointContent>
@@ -430,8 +430,8 @@
             filePath = "SwiftGrapher/Services/EquationManagementService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
             landmarkName = "setGraphCollection(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -446,8 +446,8 @@
             filePath = "SwiftGrapher/Services/EquationManagementService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
             landmarkName = "graphCollection"
             landmarkType = "24">
          </BreakpointContent>
@@ -462,8 +462,8 @@
             filePath = "SwiftGrapher/Services/EquationManagementService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
             landmarkName = "graphCollection"
             landmarkType = "24">
          </BreakpointContent>
@@ -574,8 +574,8 @@
             filePath = "SwiftGrapher/ViewControllers/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
             landmarkName = "didChangeText()"
             landmarkType = "7">
             <Locations>
@@ -670,8 +670,8 @@
             filePath = "SwiftGrapher/ViewControllers/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
             landmarkName = "textViewAnnotations()"
             landmarkType = "7">
             <Locations>
@@ -718,8 +718,8 @@
             filePath = "SwiftGrapher/ViewControllers/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "254"
-            endingLineNumber = "254"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
             landmarkName = "textView(_:viewForLineAnnotation:textLineFragment:proposedViewFrame:)"
             landmarkType = "7">
             <Locations>
@@ -766,8 +766,8 @@
             filePath = "SwiftGrapher/ViewControllers/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "263"
-            endingLineNumber = "263"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
             landmarkName = "textViewAnnotations()"
             landmarkType = "7">
          </BreakpointContent>
@@ -830,8 +830,8 @@
             filePath = "SwiftGrapher/ViewControllers/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
             <Locations>
@@ -866,6 +866,173 @@
                   offsetFromSymbolStart = "32">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "132610CE-67CF-4573-AECA-DADF387D474B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftGrapher/ViewControllers/SidebarViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "makeMenu()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "132610CE-67CF-4573-AECA-DADF387D474B - daba47335be5d761"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftGrapher.SidebarViewController.makeMenu() -&gt; __C.NSMenu"
+                  moduleName = "SwiftGrapher"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/starman/Documents/Projects/SwiftGrapher/SwiftGrapher/ViewControllers/SidebarViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "740">
+               </Location>
+               <Location
+                  uuid = "132610CE-67CF-4573-AECA-DADF387D474B - daba47335be5d761"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftGrapher.SidebarViewController.makeMenu() -&gt; __C.NSMenu"
+                  moduleName = "SwiftGrapher"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/starman/Documents/Projects/SwiftGrapher/SwiftGrapher/ViewControllers/SidebarViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "732">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
+         <BreakpointContent
+            uuid = "A2483A21-A55B-466C-B42D-F020E800403F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            symbolName = "LAYOUT_CONSTRAINTS_NOT_SATISFIABLE"
+            moduleName = "">
+            <Locations>
+               <Location
+                  uuid = "A2483A21-A55B-466C-B42D-F020E800403F - ca5a5abeb0dbd6ce"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LAYOUT_CONSTRAINTS_NOT_SATISFIABLE"
+                  moduleName = "AppKit"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6EF3C0CF-6653-4954-843B-808AF3459D0C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftGrapher/Views/HorizontalColorSelectView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "27551596-AAAD-49C6-95BD-6233B0026D4D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftGrapher/ViewControllers/SidebarViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "didChangeColorOfEquation(color:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "27551596-AAAD-49C6-95BD-6233B0026D4D - 795d8ad9730366b6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftGrapher.SidebarViewController.didChangeColorOfEquation(color: __C.CGColorRef) -&gt; ()"
+                  moduleName = "SwiftGrapher"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/starman/Documents/Projects/SwiftGrapher/SwiftGrapher/ViewControllers/SidebarViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "95"
+                  endingLineNumber = "95"
+                  offsetFromSymbolStart = "788">
+               </Location>
+               <Location
+                  uuid = "27551596-AAAD-49C6-95BD-6233B0026D4D - 795d8ad9730366b6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftGrapher.SidebarViewController.didChangeColorOfEquation(color: __C.CGColorRef) -&gt; ()"
+                  moduleName = "SwiftGrapher"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/starman/Documents/Projects/SwiftGrapher/SwiftGrapher/ViewControllers/SidebarViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "95"
+                  endingLineNumber = "95"
+                  offsetFromSymbolStart = "1164">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7A9008BA-EDC3-4BB2-B18B-D2B04F96A4EE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftGrapher/ViewControllers/SidebarViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
+            landmarkName = "didPressEditEquation(sender:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BA51C5D8-D893-457D-A65C-4DEF75A00DB7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftGrapher/ViewControllers/EquationDetailsSheetViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
+            landmarkName = "didChangeColor()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

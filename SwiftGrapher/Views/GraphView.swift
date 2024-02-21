@@ -11,7 +11,19 @@ final class GraphView: TransformManager {
     
     weak var dataSource: GraphViewDataSource?
     
-    private func drawAxes() {
+    @Invalidating(.display)
+    var functionLineWidth: Double = 2
+    
+    @Invalidating(.display)
+    var showAxes: Bool = true
+    
+    var isScrollEnabled: Bool = true {
+        didSet {
+            self.scrollView.isScrollEnabled = isScrollEnabled
+        }
+    }
+    
+    private func drawAxes(context: CGContext) {
         let width = self.frame.width
         let height = self.frame.height
         
@@ -25,12 +37,17 @@ final class GraphView: TransformManager {
         horizontalBarPath.move(to: CGPoint(x: 0, y: horizontalBaseY))
         horizontalBarPath.addLine(to: CGPoint(x: width, y: horizontalBaseY))
         
-        NSColor.lightGray.setStroke()
-        NSBezierPath(cgPath: verticalBarPath).stroke()
-        NSBezierPath(cgPath: horizontalBarPath).stroke()
+        context.setStrokeColor(NSColor.lightGray.cgColor)
+        context.setLineWidth(1)
+        
+        context.addPath(verticalBarPath)
+        context.strokePath()
+        
+        context.addPath(horizontalBarPath)
+        context.strokePath()
     }
     
-    private func drawFunctions() {
+    private func drawFunctions(context: CGContext) {
         guard let dataSource else {
             return
         }
@@ -41,11 +58,11 @@ final class GraphView: TransformManager {
                 continue
             }
             
-            drawFunction(withIndex: index)
+            drawFunction(context: context, withIndex: index)
         }
     }
     
-    private func drawFunction(withIndex index: Int) {
+    private func drawFunction(context: CGContext, withIndex index: Int) {
         guard let dataSource else {
             return
         }
@@ -113,10 +130,13 @@ final class GraphView: TransformManager {
         }
         
         let color = dataSource.graph(self, colorForGraph: index)
-        NSColor(cgColor: color)?.setStroke()
-        let functionNS = NSBezierPath(cgPath: functionPath)
-        functionNS.lineWidth = 2
-        functionNS.stroke()
+        
+        context.setStrokeColor(color)
+        context.setLineWidth(functionLineWidth)
+        context.setLineCap(.round)
+        
+        context.addPath(functionPath)
+        context.strokePath()
     }
     
     override func didUpdateTranslationOrScale() {
@@ -128,8 +148,14 @@ final class GraphView: TransformManager {
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
         
-        drawAxes() 
-        drawFunctions()
+        guard let context = NSGraphicsContext.current?.cgContext else {
+            return
+        }
+        
+        if showAxes {
+            drawAxes(context: context)
+        }
+        drawFunctions(context: context)
     }
     
 }
