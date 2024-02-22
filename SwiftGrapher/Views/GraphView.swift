@@ -59,15 +59,21 @@ final class GraphView: TransformManager {
         let horizontalBaseY = (height * transformAnchorPoint.y + translation.y)
         let origin = CGPoint(x: verticalBaseX, y: horizontalBaseY)
         
-        let range = functionRange(width: width)
         let deltaSteps = if scale < 1 {
             floor(1.0 / scale)
         } else {
             1 / floor(scale)
         }
         
+        drawHorizontalAxisNumbers(context: context, origin: origin, deltaSteps: deltaSteps, width: width)
+        
+        drawVerticalAxisNumbers(context: context, origin: origin, deltaSteps: deltaSteps, height: height)
+    }
+    
+    private func drawHorizontalAxisNumbers(context: CGContext, origin: CGPoint, deltaSteps: CGFloat, width: CGFloat) {
+        let range = functionRange(width: width, scale: 2)
         let iterations = (range.upperBound - range.lowerBound) / deltaSteps
-        let drawDelta = self.frame.width / iterations
+        let drawDelta = self.frame.width / iterations * 2
         
         var x = range.lowerBound < 0 ? floor(range.lowerBound) : ceil(range.lowerBound / scale) + deltaSteps
         let numIterationsForOrigin = x / deltaSteps
@@ -80,15 +86,46 @@ final class GraphView: TransformManager {
                 drawX += drawDelta
             }
             
-            let frac = abs(x - floor(x))
-            let dSigfigs = (frac == 0) ? 0 : ceil(abs(log(frac)))
-            let sigfigs = min(3, !dSigfigs.isFinite ? 0 : Int(dSigfigs))
-            let text = String(format: "%.\(sigfigs)f", x)
-            drawText(context: context, text: text, point: CGPoint(x: drawX, y: horizontalBaseY), padding: CGPoint(x: x == 0 ? -16 : 0, y: -16))
-            
-            
+            let drawPoint = CGPoint(x: drawX, y: origin.y)
+            let padding = CGPoint(x: x == 0 ? -16 : 0, y: -16)
+            drawAxisNumber(context: context, number: x, atPoint: drawPoint, padding: padding)
+             
         }
+    }
+    
+    private func drawVerticalAxisNumbers(context: CGContext, origin: CGPoint, deltaSteps: CGFloat, height: CGFloat) {
+        let range = verticalFunctionRange(height: height, scale: 2)
+        let iterations = (range.upperBound - range.lowerBound) / deltaSteps
+        let drawDelta = self.frame.height / iterations * 2
         
+        var y = range.lowerBound < 0 ? floor(range.lowerBound) : ceil(range.lowerBound / scale) + deltaSteps
+        let numIterationsForOrigin = y / deltaSteps
+        var drawY = origin.y + drawDelta * numIterationsForOrigin
+        
+        for _ in 0..<Int(ceil(iterations)) {
+            
+            defer {
+                y += deltaSteps
+                drawY += drawDelta
+            }
+            
+            if y == 0 {
+                continue
+            }
+            
+            let drawPoint = CGPoint(x: origin.x, y: drawY)
+            let padding = CGPoint(x: -16, y: 0)
+            drawAxisNumber(context: context, number: y, atPoint: drawPoint, padding: padding)
+             
+        }
+    }
+    
+    private func drawAxisNumber(context: CGContext, number x: CGFloat, atPoint point: CGPoint, padding: CGPoint) {
+        let frac = floor(abs(x - floor(x)) * 1000) / 1000
+        let dSigfigs = (frac == 0) ? 0 : ceil(abs(log(frac)))
+        let sigfigs = min(3, !dSigfigs.isFinite ? 0 : Int(dSigfigs))
+        let text = String(format: "%.\(sigfigs)f", x)
+        drawText(context: context, text: text, point: point, padding: padding)
     }
     
     private func drawText(context: CGContext, text: String, point: CGPoint, padding: CGPoint = .zero) {
@@ -189,13 +226,25 @@ final class GraphView: TransformManager {
         context.strokePath()
     }
     
-    private func functionRange(width: CGFloat) -> Range<CGFloat> {
+    private func functionRange(width: CGFloat, scale finalScale: CGFloat = 1) -> Range<CGFloat> {
         let midWidth = width / 2
         let horizontalScale = horizontalUnitSize * scale
         let horizontalScaleFactor = 1 / horizontalScale
         
-        let start = (-midWidth - translation.x) * horizontalScaleFactor
-        let end = (midWidth - translation.x) * horizontalScaleFactor
+        let start = (-midWidth - translation.x) * horizontalScaleFactor * finalScale
+        let end = (midWidth - translation.x) * horizontalScaleFactor * finalScale
+        let range = start..<end
+        
+        return range
+    }
+    
+    private func verticalFunctionRange(height: CGFloat, scale finalScale: CGFloat = 1) -> Range<CGFloat> {
+        let midHeight = height / 2
+        let verticalScale = verticalUnitSize * scale
+        let verticalScaleFactor = 1 / verticalScale
+        
+        let start = (-midHeight - translation.y) * verticalScaleFactor * finalScale
+        let end = (midHeight - translation.y) * verticalScaleFactor * finalScale
         let range = start..<end
         
         return range
