@@ -17,6 +17,10 @@ final class GraphView: TransformManager {
     @Invalidating(.display)
     var showAxes: Bool = true
     
+    var horizontalUnitSize: CGFloat = 40.0
+    
+    var verticalUnitSize: CGFloat = 40.0
+    
     var isScrollEnabled: Bool = true {
         didSet {
             self.scrollView.isScrollEnabled = isScrollEnabled
@@ -47,6 +51,57 @@ final class GraphView: TransformManager {
         context.strokePath()
     }
     
+    private func drawAxisNumbers(context: CGContext) {
+        let width = self.frame.width
+        let height = self.frame.height
+        
+        let verticalBaseX = (width * transformAnchorPoint.x + translation.x)
+        let horizontalBaseY = (height * transformAnchorPoint.y + translation.y)
+        let origin = CGPoint(x: verticalBaseX, y: horizontalBaseY)
+        
+        let range = functionRange(width: width)
+        let deltaSteps = if scale < 1 {
+            floor(1.0 / scale)
+        } else {
+            1 / floor(scale)
+        }
+        
+        let iterations = (range.upperBound - range.lowerBound) / deltaSteps
+        let drawDelta = self.frame.width / iterations
+        
+        var x = range.lowerBound < 0 ? floor(range.lowerBound) : ceil(range.lowerBound / scale) + deltaSteps
+        let numIterationsForOrigin = x / deltaSteps
+        var drawX = origin.x + drawDelta * numIterationsForOrigin
+        
+        for _ in 0..<Int(ceil(iterations)) {
+            
+            defer {
+                x += deltaSteps
+                drawX += drawDelta
+            }
+            
+            let frac = abs(x - floor(x))
+            let dSigfigs = (frac == 0) ? 0 : ceil(abs(log(frac)))
+            let sigfigs = min(3, !dSigfigs.isFinite ? 0 : Int(dSigfigs))
+            let text = String(format: "%.\(sigfigs)f", x)
+            drawText(context: context, text: text, point: CGPoint(x: drawX, y: horizontalBaseY), padding: CGPoint(x: x == 0 ? -16 : 0, y: -16))
+            
+            
+        }
+        
+    }
+    
+    private func drawText(context: CGContext, text: String, point: CGPoint, padding: CGPoint = .zero) {
+        let color = NSColor.textColor.cgColor
+        let attributes: [NSAttributedString.Key : Any] = [.foregroundColor: color]
+        let attributedString = NSAttributedString(string: text,
+                                                  attributes: attributes)
+        let line = CTLineCreateWithAttributedString(attributedString)
+        context.textPosition = CGPoint(x: point.x + padding.x,
+                                       y: point.y + padding.y)
+        CTLineDraw(line, context)
+    }
+    
     private func drawFunctions(context: CGContext) {
         guard let dataSource else {
             return
@@ -70,16 +125,11 @@ final class GraphView: TransformManager {
         let width = self.frame.width
         let height = self.frame.height
         
-        let midWidth = width / 2
-        let horizontalScale = 10.0 * scale
-        let horizontalScaleFactor = 1 / horizontalScale
+        let range = functionRange(width: width)
         
         let functionPath = CGMutablePath()
-        let start = (-midWidth - translation.x) * horizontalScaleFactor
-        let end = (midWidth - translation.x) * horizontalScaleFactor
-        let range = start..<end
         
-        let deltaSteps = 6.0 * scale
+        let deltaSteps = 2 * .pi * max(1, scale)
         let delta = 1 / Double(deltaSteps)
         let iterations = deltaSteps * (range.upperBound - range.lowerBound)
         let drawDelta = self.frame.width / iterations
@@ -96,7 +146,7 @@ final class GraphView: TransformManager {
                 drawX += drawDelta
             }
             
-            let y = scale * dataSource.graph(self, valueForGraph: index, x: x) + transformAnchorPoint.y * height + translation.y
+            let y = verticalUnitSize * scale * dataSource.graph(self, valueForGraph: index, x: x) + transformAnchorPoint.y * height + translation.y
             let point = CGPoint(x: drawX, y: y)
             
             // FIXME: Use vertical asymptotic analysis to determine
@@ -139,6 +189,18 @@ final class GraphView: TransformManager {
         context.strokePath()
     }
     
+    private func functionRange(width: CGFloat) -> Range<CGFloat> {
+        let midWidth = width / 2
+        let horizontalScale = horizontalUnitSize * scale
+        let horizontalScaleFactor = 1 / horizontalScale
+        
+        let start = (-midWidth - translation.x) * horizontalScaleFactor
+        let end = (midWidth - translation.x) * horizontalScaleFactor
+        let range = start..<end
+        
+        return range
+    }
+    
     override func didUpdateTranslationOrScale() {
         super.didUpdateTranslationOrScale()
         
@@ -154,6 +216,7 @@ final class GraphView: TransformManager {
         
         if showAxes {
             drawAxes(context: context)
+            drawAxisNumbers(context: context)
         }
         drawFunctions(context: context)
     }
